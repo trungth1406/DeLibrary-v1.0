@@ -34,8 +34,7 @@ public class IndimappingsApiControllerIntegrationTest {
 
     @Test
     public void deleteMappingTest() throws Exception {
-        BigDecimal id = new BigDecimal();
-        ResponseEntity<ResponseMessage> responseEntity = api.deleteMapping(id);
+        ResponseEntity<ResponseMessage> responseEntity = api.deleteMapping(null);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 
@@ -47,8 +46,7 @@ public class IndimappingsApiControllerIntegrationTest {
 
     @Test
     public void updateMappingTest() throws Exception {
-        BigDecimal id = new BigDecimal();
-        ResponseEntity<ResponseMessage> responseEntity = api.updateMapping(id);
+        ResponseEntity<ResponseMessage> responseEntity = api.updateMapping(null);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 

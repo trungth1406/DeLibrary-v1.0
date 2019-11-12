@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/fragments/head :: head"></th:block>
+</head>
+<body>
+
+<div th:fragment="side-bar" class="ui visible sidebar inverted vertical menu">
+    <h2 class="ui orange header">
+        <img class="ui image" src="../../static/images/library.png" th:src="@{/images/library.png}">
+        <div class="content">
+            DeLibrary
+        </div>
+    </h2>
+    <a class="item" href="/individual" th:href="@{/individual}">
+        Quản lý viên cá nhân
+    </a>
+    <a class="item">
+        Quản lý nhà hàng
+    </a>
+</div>
+
+</body>
+</html>

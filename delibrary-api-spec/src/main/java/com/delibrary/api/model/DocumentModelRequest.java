@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -18,7 +17,7 @@ import javax.validation.constraints.*;
 @Validated
 public class DocumentModelRequest   {
   @JsonProperty("id")
-  private BigDecimal id = null;
+  private Integer id = null;
 
   @JsonProperty("docName")
   private String docName = null;
@@ -26,7 +25,7 @@ public class DocumentModelRequest   {
   @JsonProperty("docType")
   private DocType docType = null;
 
-  public DocumentModelRequest id(BigDecimal id) {
+  public DocumentModelRequest id(Integer id) {
     this.id = id;
     return this;
   }
@@ -37,12 +36,11 @@ public class DocumentModelRequest   {
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
-  public BigDecimal getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(BigDecimal id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

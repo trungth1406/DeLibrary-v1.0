@@ -1,0 +1,9 @@
+{
+  "name": "static",
+  "version": "1.0.0",
+  "dependencies": {
+    "datatables.net": "^1.10.20",
+    "datatables.net-se": "^1.10.20",
+    "jquery": "^3.1.1"
+  }
+}

@@ -34,8 +34,7 @@ public class IndividualsApiControllerIntegrationTest {
 
     @Test
     public void deleteIndividualTest() throws Exception {
-        BigDecimal id = new BigDecimal();
-        ResponseEntity<ResponseMessage> responseEntity = api.deleteIndividual(id);
+        ResponseEntity<ResponseMessage> responseEntity = api.deleteIndividual(null);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 
@@ -47,8 +46,7 @@ public class IndividualsApiControllerIntegrationTest {
 
     @Test
     public void updateIndividualTest() throws Exception {
-        BigDecimal id = new BigDecimal();
-        ResponseEntity<ResponseMessage> responseEntity = api.updateIndividual(id);
+        ResponseEntity<ResponseMessage> responseEntity = api.updateIndividual(null);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 

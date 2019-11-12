@@ -2,14 +2,10 @@ package com.delibrary.api.model;
 
 import java.util.Objects;
 import com.delibrary.api.model.DocType;
-import com.delibrary.api.model.EndPoint;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -21,7 +17,7 @@ import javax.validation.constraints.*;
 @Validated
 public class DocumentModel   {
   @JsonProperty("id")
-  private BigDecimal id = null;
+  private Integer id = null;
 
   @JsonProperty("docName")
   private String docName = null;
@@ -29,11 +25,7 @@ public class DocumentModel   {
   @JsonProperty("docType")
   private DocType docType = null;
 
-  @JsonProperty("endPoint")
-  @Valid
-  private List<EndPoint> endPoint = null;
-
-  public DocumentModel id(BigDecimal id) {
+  public DocumentModel id(Integer id) {
     this.id = id;
     return this;
   }
@@ -44,12 +36,11 @@ public class DocumentModel   {
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
-  public BigDecimal getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(BigDecimal id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -92,33 +83,6 @@ public class DocumentModel   {
     this.docType = docType;
   }
 
-  public DocumentModel endPoint(List<EndPoint> endPoint) {
-    this.endPoint = endPoint;
-    return this;
-  }
-
-  public DocumentModel addEndPointItem(EndPoint endPointItem) {
-    if (this.endPoint == null) {
-      this.endPoint = new ArrayList<>();
-    }
-    this.endPoint.add(endPointItem);
-    return this;
-  }
-
-  /**
-   * Get endPoint
-   * @return endPoint
-  **/
-  @ApiModelProperty(value = "")
-  @Valid
-  public List<EndPoint> getEndPoint() {
-    return endPoint;
-  }
-
-  public void setEndPoint(List<EndPoint> endPoint) {
-    this.endPoint = endPoint;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -131,13 +95,12 @@ public class DocumentModel   {
     DocumentModel documentModel = (DocumentModel) o;
     return Objects.equals(this.id, documentModel.id) &&
         Objects.equals(this.docName, documentModel.docName) &&
-        Objects.equals(this.docType, documentModel.docType) &&
-        Objects.equals(this.endPoint, documentModel.endPoint);
+        Objects.equals(this.docType, documentModel.docType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, docName, docType, endPoint);
+    return Objects.hash(id, docName, docType);
   }
 
   @Override
@@ -148,7 +111,6 @@ public class DocumentModel   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    docName: ").append(toIndentedString(docName)).append("\n");
     sb.append("    docType: ").append(toIndentedString(docType)).append("\n");
-    sb.append("    endPoint: ").append(toIndentedString(endPoint)).append("\n");
     sb.append("}");
     return sb.toString();
   }

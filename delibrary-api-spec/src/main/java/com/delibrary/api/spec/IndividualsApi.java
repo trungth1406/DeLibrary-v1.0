@@ -5,7 +5,6 @@
  */
 package com.delibrary.api.spec;
 
-import java.math.BigDecimal;
 import com.delibrary.api.model.ErrorResponse;
 import com.delibrary.api.model.IndividualModelRequest;
 import com.delibrary.api.model.IndividualModelResponse;
@@ -88,7 +87,7 @@ public interface IndividualsApi {
     @RequestMapping(value = "/individuals/{id}/delete",
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    default ResponseEntity<ResponseMessage> deleteIndividual(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") BigDecimal id) {
+    default ResponseEntity<ResponseMessage> deleteIndividual(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") Integer id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
@@ -119,7 +118,7 @@ public interface IndividualsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"endpoint\" : [ \"EDIT\", \"EDIT\" ],\n    \"dob\" : \"2000-01-23\",\n    \"companyName\" : \"DeLi\",\n    \"name\" : \"name\",\n    \"id\" : 0.8008281904610115,\n    \"position\" : \"CTHDQT\"\n  }, {\n    \"endpoint\" : [ \"EDIT\", \"EDIT\" ],\n    \"dob\" : \"2000-01-23\",\n    \"companyName\" : \"DeLi\",\n    \"name\" : \"name\",\n    \"id\" : 0.8008281904610115,\n    \"position\" : \"CTHDQT\"\n  } ]\n}", IndividualModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dob\" : \"2000-01-23\",\n    \"companyName\" : \"DeLi\",\n    \"name\" : \"name\",\n    \"id\" : 0,\n    \"position\" : \"CTHDQT\"\n  }, {\n    \"dob\" : \"2000-01-23\",\n    \"companyName\" : \"DeLi\",\n    \"name\" : \"name\",\n    \"id\" : 0,\n    \"position\" : \"CTHDQT\"\n  } ]\n}", IndividualModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -142,7 +141,7 @@ public interface IndividualsApi {
     @RequestMapping(value = "/individuals/{id}/edit",
         produces = { "application/json" }, 
         method = RequestMethod.PATCH)
-    default ResponseEntity<ResponseMessage> updateIndividual(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") BigDecimal id) {
+    default ResponseEntity<ResponseMessage> updateIndividual(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") Integer id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {

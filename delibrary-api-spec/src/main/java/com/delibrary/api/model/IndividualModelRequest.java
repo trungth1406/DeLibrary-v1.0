@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 import java.util.Date;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -18,7 +17,7 @@ import javax.validation.constraints.*;
 @Validated
 public class IndividualModelRequest   {
   @JsonProperty("id")
-  private BigDecimal id = null;
+  private Integer id = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -32,7 +31,7 @@ public class IndividualModelRequest   {
   @JsonProperty("companyName")
   private String companyName = null;
 
-  public IndividualModelRequest id(BigDecimal id) {
+  public IndividualModelRequest id(Integer id) {
     this.id = id;
     return this;
   }
@@ -43,12 +42,11 @@ public class IndividualModelRequest   {
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
-  public BigDecimal getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(BigDecimal id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

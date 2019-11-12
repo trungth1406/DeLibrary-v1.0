@@ -5,7 +5,6 @@
  */
 package com.delibrary.api.spec;
 
-import java.math.BigDecimal;
 import com.delibrary.api.model.DocumentModelRequest;
 import com.delibrary.api.model.DocumentModelResponse;
 import com.delibrary.api.model.ErrorResponse;
@@ -65,7 +64,7 @@ public interface IndidocumentsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"endPoint\" : [ \"EDIT\", \"EDIT\" ],\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"id\" : 0.8008281904610115\n  }, {\n    \"endPoint\" : [ \"EDIT\", \"EDIT\" ],\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"id\" : 0.8008281904610115\n  } ]\n}", DocumentModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"id\" : 0\n  }, {\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"id\" : 0\n  } ]\n}", DocumentModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -88,7 +87,7 @@ public interface IndidocumentsApi {
     @RequestMapping(value = "/indidocuments/{id}/delete",
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    default ResponseEntity<ResponseMessage> deleteIndiDocument(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") BigDecimal id) {
+    default ResponseEntity<ResponseMessage> deleteIndiDocument(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") Integer id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
@@ -119,7 +118,7 @@ public interface IndidocumentsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"endPoint\" : [ \"EDIT\", \"EDIT\" ],\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"id\" : 0.8008281904610115\n  }, {\n    \"endPoint\" : [ \"EDIT\", \"EDIT\" ],\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"id\" : 0.8008281904610115\n  } ]\n}", DocumentModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"id\" : 0\n  }, {\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"id\" : 0\n  } ]\n}", DocumentModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -142,7 +141,7 @@ public interface IndidocumentsApi {
     @RequestMapping(value = "/indidocuments/{id}/edit",
         produces = { "application/json" }, 
         method = RequestMethod.PATCH)
-    default ResponseEntity<ResponseMessage> updateIndiDocument(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") BigDecimal id) {
+    default ResponseEntity<ResponseMessage> updateIndiDocument(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") Integer id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {

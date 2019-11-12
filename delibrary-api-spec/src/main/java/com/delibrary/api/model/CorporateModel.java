@@ -1,13 +1,10 @@
 package com.delibrary.api.model;
 
 import java.util.Objects;
-import com.delibrary.api.model.EndPoint;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -22,10 +19,6 @@ public class CorporateModel   {
 
   @JsonProperty("city")
   private String city = null;
-
-  @JsonProperty("endPoint")
-  @Valid
-  private List<EndPoint> endPoint = null;
 
   public CorporateModel name(String name) {
     this.name = name;
@@ -65,33 +58,6 @@ public class CorporateModel   {
     this.city = city;
   }
 
-  public CorporateModel endPoint(List<EndPoint> endPoint) {
-    this.endPoint = endPoint;
-    return this;
-  }
-
-  public CorporateModel addEndPointItem(EndPoint endPointItem) {
-    if (this.endPoint == null) {
-      this.endPoint = new ArrayList<>();
-    }
-    this.endPoint.add(endPointItem);
-    return this;
-  }
-
-  /**
-   * Get endPoint
-   * @return endPoint
-  **/
-  @ApiModelProperty(value = "")
-  @Valid
-  public List<EndPoint> getEndPoint() {
-    return endPoint;
-  }
-
-  public void setEndPoint(List<EndPoint> endPoint) {
-    this.endPoint = endPoint;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -103,13 +69,12 @@ public class CorporateModel   {
     }
     CorporateModel corporateModel = (CorporateModel) o;
     return Objects.equals(this.name, corporateModel.name) &&
-        Objects.equals(this.city, corporateModel.city) &&
-        Objects.equals(this.endPoint, corporateModel.endPoint);
+        Objects.equals(this.city, corporateModel.city);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, city, endPoint);
+    return Objects.hash(name, city);
   }
 
   @Override
@@ -119,7 +84,6 @@ public class CorporateModel   {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
-    sb.append("    endPoint: ").append(toIndentedString(endPoint)).append("\n");
     sb.append("}");
     return sb.toString();
   }

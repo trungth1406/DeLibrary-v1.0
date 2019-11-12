@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<div th:fragment="layout">
+<th:block th:insert="/fragments/sidebar :: side-bar"></th:block>
+    <div class="ui menu">
+        <div class="ui category search item">
+            <div class="ui transparent icon input">
+                <input class="prompt" type="text" placeholder="Search animals...">
+                <i class="search link icon"></i>
+            </div>
+            <div class="results"></div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

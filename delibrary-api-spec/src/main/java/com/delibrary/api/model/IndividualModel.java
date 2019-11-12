@@ -1,15 +1,11 @@
 package com.delibrary.api.model;
 
 import java.util.Objects;
-import com.delibrary.api.model.EndPoint;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -21,7 +17,7 @@ import javax.validation.constraints.*;
 @Validated
 public class IndividualModel   {
   @JsonProperty("id")
-  private BigDecimal id = null;
+  private Integer id = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -35,11 +31,7 @@ public class IndividualModel   {
   @JsonProperty("companyName")
   private String companyName = null;
 
-  @JsonProperty("endpoint")
-  @Valid
-  private List<EndPoint> endpoint = null;
-
-  public IndividualModel id(BigDecimal id) {
+  public IndividualModel id(Integer id) {
     this.id = id;
     return this;
   }
@@ -50,12 +42,11 @@ public class IndividualModel   {
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
-  public BigDecimal getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(BigDecimal id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -136,33 +127,6 @@ public class IndividualModel   {
     this.companyName = companyName;
   }
 
-  public IndividualModel endpoint(List<EndPoint> endpoint) {
-    this.endpoint = endpoint;
-    return this;
-  }
-
-  public IndividualModel addEndpointItem(EndPoint endpointItem) {
-    if (this.endpoint == null) {
-      this.endpoint = new ArrayList<>();
-    }
-    this.endpoint.add(endpointItem);
-    return this;
-  }
-
-  /**
-   * Get endpoint
-   * @return endpoint
-  **/
-  @ApiModelProperty(value = "")
-  @Valid
-  public List<EndPoint> getEndpoint() {
-    return endpoint;
-  }
-
-  public void setEndpoint(List<EndPoint> endpoint) {
-    this.endpoint = endpoint;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -177,13 +141,12 @@ public class IndividualModel   {
         Objects.equals(this.name, individualModel.name) &&
         Objects.equals(this.dob, individualModel.dob) &&
         Objects.equals(this.position, individualModel.position) &&
-        Objects.equals(this.companyName, individualModel.companyName) &&
-        Objects.equals(this.endpoint, individualModel.endpoint);
+        Objects.equals(this.companyName, individualModel.companyName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, dob, position, companyName, endpoint);
+    return Objects.hash(id, name, dob, position, companyName);
   }
 
   @Override
@@ -196,7 +159,6 @@ public class IndividualModel   {
     sb.append("    dob: ").append(toIndentedString(dob)).append("\n");
     sb.append("    position: ").append(toIndentedString(position)).append("\n");
     sb.append("    companyName: ").append(toIndentedString(companyName)).append("\n");
-    sb.append("    endpoint: ").append(toIndentedString(endpoint)).append("\n");
     sb.append("}");
     return sb.toString();
   }

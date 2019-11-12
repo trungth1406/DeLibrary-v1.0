@@ -5,7 +5,6 @@
  */
 package com.delibrary.api.spec;
 
-import java.math.BigDecimal;
 import com.delibrary.api.model.ErrorResponse;
 import com.delibrary.api.model.IndiMappingModelRequest;
 import com.delibrary.api.model.IndiMappingModelResponse;
@@ -88,7 +87,7 @@ public interface IndimappingsApi {
     @RequestMapping(value = "/indimappings/{id}/delete",
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    default ResponseEntity<ResponseMessage> deleteMapping(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") BigDecimal id) {
+    default ResponseEntity<ResponseMessage> deleteMapping(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") Integer id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
@@ -119,7 +118,7 @@ public interface IndimappingsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"endPoint\" : [ \"EDIT\", \"EDIT\" ],\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\"\n  }\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\"\n  }\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -142,7 +141,7 @@ public interface IndimappingsApi {
     @RequestMapping(value = "/indimappings/{id}/edit",
         produces = { "application/json" }, 
         method = RequestMethod.PATCH)
-    default ResponseEntity<ResponseMessage> updateMapping(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") BigDecimal id) {
+    default ResponseEntity<ResponseMessage> updateMapping(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") Integer id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {

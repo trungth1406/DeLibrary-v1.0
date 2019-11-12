@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/fragments/head :: head"></th:block>
+    <script th:inline="javascript">
+        $(document).ready(function ($) {
+            $('.menu .item').tab();
+
+            console.log("Working")
+            var table = $("#individual").DataTable({
+                    ajax: "/res/individual/employees",
+                    stateSave: true,
+                    columns: [
+                        {data: "id", title: "ID"},
+                        {data: "individualName", title: "Họ tên"},
+                        {data: "dob", title: "Ngày sinh"},
+                        {data: "company", title: "Tên công ty"},
+                        {data: "position", title: "Vị trí"},
+                        {
+                            data: null,
+                            className: "center",
+                            defaultContent:
+                                "<a href='#' class='btn btn-danger btn-circle editor_remove'><i class='fas fa-trash'></i></a>"
+                        },
+                        {
+                            data: null,
+                            className: "center",
+                            defaultContent:
+                                "<a href='#' class='btn btn-warning btn-circle editor_edit'><i class='fas fa-edit'></i></a>"
+                        }
+                    ]
+                });
+        })
+    </script>
+</head>
+<body>
+
+<div class="ui container">
+    <th:block th:insert="/fragments/layout :: layout"></th:block>
+
+    <div class="ui segment">
+
+        <div class="ui top attached tabular menu">
+            <a class="active item" data-tab="first">Danh sách thông tin cá nhân</a>
+            <a class="item" data-tab="second">Danh sách giấy tờ, hồ sơ cá nhân</a>
+        </div>
+        <div class="ui bottom attached active tab segment" data-tab="first">
+            <table class="ui red table" id="individual">
+                <thead>
+                <tr><th>Food</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                </tr></thead><tbody>
+            <tr>
+                <td>Apples</td>
+                <td>200</td>
+                <td>0g</td>
+            </tr>
+            <tr>
+                <td>Orange</td>
+                <td>310</td>
+                <td>0g</td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+        <div class="ui bottom attached  tab segment" data-tab="second">
+            <table class="ui olive table">
+                <thead>
+                <tr><th>Food</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                </tr></thead><tbody>
+            <tr>
+                <td>Apples</td>
+                <td>200</td>
+                <td>0g</td>
+            </tr>
+            <tr>
+                <td>Orange</td>
+                <td>310</td>
+                <td>0g</td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>

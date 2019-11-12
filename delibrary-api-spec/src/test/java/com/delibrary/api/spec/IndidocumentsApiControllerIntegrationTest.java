@@ -34,8 +34,7 @@ public class IndidocumentsApiControllerIntegrationTest {
 
     @Test
     public void deleteIndiDocumentTest() throws Exception {
-        BigDecimal id = new BigDecimal();
-        ResponseEntity<ResponseMessage> responseEntity = api.deleteIndiDocument(id);
+        ResponseEntity<ResponseMessage> responseEntity = api.deleteIndiDocument(null);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 
@@ -47,8 +46,7 @@ public class IndidocumentsApiControllerIntegrationTest {
 
     @Test
     public void updateIndiDocumentTest() throws Exception {
-        BigDecimal id = new BigDecimal();
-        ResponseEntity<ResponseMessage> responseEntity = api.updateIndiDocument(id);
+        ResponseEntity<ResponseMessage> responseEntity = api.updateIndiDocument(null);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 

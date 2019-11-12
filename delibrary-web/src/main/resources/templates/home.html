@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:insert="/fragments/head :: head"></th:block>
+
+<script th:inline="javascript">
+    $(document).ready(function ($) {
+
+    });
+</script>
+<body>
+
+<div class="ui container">
+<th:block th:insert="/fragments/layout :: layout"></th:block>
+<div class="ui segment">
+    <div class="ui link cards">
+        <div class="ui four column grid">
+            <div class="column">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img src="../static/images/group.png"
+                             th:src="@{/images/group.png}">
+                    </div>
+                    <div class="content">
+                        <a class="header">Danh sách cá nhân
+                            <span class="right floated like">
+                             <i class="like icon"></i>
+                             100
+                        </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img src="../static/images/resume.png" th:src="@{/images/resume.png}">
+                    </div>
+                    <div class="content">
+                        <a class="header">Giấy tờ cá nhân
+                            <span class="right floated like">
+                             <i class="like icon"></i>
+                             100
+                        </span></a>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="column">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img src="../static/images/franchise.png" th:src="@{/images/franchise.png}">
+                    </div>
+                    <div class="content">
+                        <a class="header">Danh sách nhà hàng
+                            <span class="right floated like">
+                             <i class="like icon"></i>
+                             100
+                        </span></a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="column">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img src="../static/images/folders.png" th:src="@{/images/folders.png}">
+                    </div>
+                    <div class="content">
+                        <a class="header">Giấy tờ nhà hàng
+                            <span class="right floated like">
+                             <i class="like icon"></i>
+                             100
+                        </span></a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <div class="ui horizontal divider">
+        AND
+    </div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

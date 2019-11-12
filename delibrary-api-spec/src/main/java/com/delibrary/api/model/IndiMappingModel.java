@@ -2,13 +2,10 @@ package com.delibrary.api.model;
 
 import java.util.Objects;
 import com.delibrary.api.model.DocType;
-import com.delibrary.api.model.EndPoint;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -38,10 +35,6 @@ public class IndiMappingModel   {
 
   @JsonProperty("dateOfSigning")
   private String dateOfSigning = null;
-
-  @JsonProperty("endPoint")
-  @Valid
-  private List<EndPoint> endPoint = null;
 
   public IndiMappingModel id(String id) {
     this.id = id;
@@ -177,33 +170,6 @@ public class IndiMappingModel   {
     this.dateOfSigning = dateOfSigning;
   }
 
-  public IndiMappingModel endPoint(List<EndPoint> endPoint) {
-    this.endPoint = endPoint;
-    return this;
-  }
-
-  public IndiMappingModel addEndPointItem(EndPoint endPointItem) {
-    if (this.endPoint == null) {
-      this.endPoint = new ArrayList<>();
-    }
-    this.endPoint.add(endPointItem);
-    return this;
-  }
-
-  /**
-   * Get endPoint
-   * @return endPoint
-  **/
-  @ApiModelProperty(value = "")
-  @Valid
-  public List<EndPoint> getEndPoint() {
-    return endPoint;
-  }
-
-  public void setEndPoint(List<EndPoint> endPoint) {
-    this.endPoint = endPoint;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -220,13 +186,12 @@ public class IndiMappingModel   {
         Objects.equals(this.docType, indiMappingModel.docType) &&
         Objects.equals(this.numOfDoc, indiMappingModel.numOfDoc) &&
         Objects.equals(this.dateOfExecution, indiMappingModel.dateOfExecution) &&
-        Objects.equals(this.dateOfSigning, indiMappingModel.dateOfSigning) &&
-        Objects.equals(this.endPoint, indiMappingModel.endPoint);
+        Objects.equals(this.dateOfSigning, indiMappingModel.dateOfSigning);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, indiname, docName, docType, numOfDoc, dateOfExecution, dateOfSigning, endPoint);
+    return Objects.hash(id, indiname, docName, docType, numOfDoc, dateOfExecution, dateOfSigning);
   }
 
   @Override
@@ -241,7 +206,6 @@ public class IndiMappingModel   {
     sb.append("    numOfDoc: ").append(toIndentedString(numOfDoc)).append("\n");
     sb.append("    dateOfExecution: ").append(toIndentedString(dateOfExecution)).append("\n");
     sb.append("    dateOfSigning: ").append(toIndentedString(dateOfSigning)).append("\n");
-    sb.append("    endPoint: ").append(toIndentedString(endPoint)).append("\n");
     sb.append("}");
     return sb.toString();
   }
