@@ -9,6 +9,7 @@ import com.delibrary.dao.service.IndividualService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
@@ -20,14 +21,25 @@ public class IndividualApiController implements IndividualsApi {
     private IndividualService individualService;
 
     @Override
-    public ResponseEntity<ResponseMessage> createIndividual(IndividualModelRequest body) {
-
-        return null;
+    public @ResponseBody ResponseEntity<ResponseMessage> createIndividual(IndividualModelRequest body) {
+        try{
+            individualService.create(body);
+            return new ResponseEntity(new ResponseMessage().description("Success"),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<ResponseMessage> deleteIndividual(Integer id) {
-        return null;
+        try{
+            individualService.delete(id);
+            return  new ResponseEntity(new ResponseMessage().description("Delete individual successfully"),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override

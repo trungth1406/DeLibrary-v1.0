@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Date;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -23,7 +22,7 @@ public class IndividualModel   {
   private String name = null;
 
   @JsonProperty("dob")
-  private Date dob = null;
+  private String dob = null;
 
   @JsonProperty("position")
   private String position = null;
@@ -69,7 +68,7 @@ public class IndividualModel   {
     this.name = name;
   }
 
-  public IndividualModel dob(Date dob) {
+  public IndividualModel dob(String dob) {
     this.dob = dob;
     return this;
   }
@@ -78,14 +77,13 @@ public class IndividualModel   {
    * Get dob
    * @return dob
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "dd/MM/yyyy", value = "")
 
-  @Valid
-  public Date getDob() {
+  public String getDob() {
     return dob;
   }
 
-  public void setDob(Date dob) {
+  public void setDob(String dob) {
     this.dob = dob;
   }
 

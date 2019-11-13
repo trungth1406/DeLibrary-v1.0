@@ -118,7 +118,7 @@ public interface IndividualsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dob\" : \"2000-01-23\",\n    \"companyName\" : \"DeLi\",\n    \"name\" : \"name\",\n    \"id\" : 0,\n    \"position\" : \"CTHDQT\"\n  }, {\n    \"dob\" : \"2000-01-23\",\n    \"companyName\" : \"DeLi\",\n    \"name\" : \"name\",\n    \"id\" : 0,\n    \"position\" : \"CTHDQT\"\n  } ]\n}", IndividualModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dob\" : \"dd/MM/yyyy\",\n    \"companyName\" : \"DeLi\",\n    \"name\" : \"name\",\n    \"id\" : 0,\n    \"position\" : \"CTHDQT\"\n  }, {\n    \"dob\" : \"dd/MM/yyyy\",\n    \"companyName\" : \"DeLi\",\n    \"name\" : \"name\",\n    \"id\" : 0,\n    \"position\" : \"CTHDQT\"\n  } ]\n}", IndividualModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

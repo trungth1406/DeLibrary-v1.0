@@ -5,31 +5,146 @@
     <script th:inline="javascript">
         $(document).ready(function ($) {
             $('.menu .item').tab();
+            $("#individual").on("click","button#indi-delete",function (e) {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                var id = row.data().id;
+                e.preventDefault();
+                $('.ui.modal#delete')
+                    .modal('show').modal({
+                    onDeny: function () {
+                        return true;
+                    },
+                    onApprove : function () {
+                        $.ajax({
+                            url: "/individuals/" + id + "/delete",
+                            type: "DELETE",
+                            data: id,
+                            success: function (data, status) {
+                                tr.remove();
+                                return true;
+                            },
+                            error: function (obj) {
+                                return false;
+                            }
+                        })
+                    }
+                });
+            })
 
-            console.log("Working")
-            var table = $("#individual").DataTable({
-                    ajax: "/res/individual/employees",
+            $("button#add-user").click(function (e) {
+                e.preventDefault();
+                $('.ui.modal#create')
+                    .modal('show').modal({
+                    onDeny: function () {
+                        return true;
+                    },
+                    onApprove : function () {
+                        var request = {
+                            "name" : $("#name").val(),
+                            "dob" : $("#dob").val(),
+                            "position" : $("#position").val(),
+                            "companyName" : $("#company-name").val()
+                        }
+                        $.ajax({
+                            url: "/individuals",
+                            type: "POST",
+                            data: JSON.stringify(request),
+                            contentType : "application/json; charset=utf-8",
+                            success: function (data, status) {
+                                tableDoc.ajax.reload();
+                                return true;
+                            },
+                            error: function (obj) {
+                                return false;
+                            }
+                        })
+                    }
+                });
+            })
+
+
+            $("#individual").on("click","button#indi-detail",function (e) {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                var id = row.data().id;
+                e.preventDefault();
+                $('.ui.modal#indi-detail')
+                    .modal('show').modal({
+                    onDeny: function () {
+                        return true;
+                    },
+                    onApprove : function () {
+                        // $.ajax({
+                        //     url: "/individuals/" + id + "/delete",
+                        //     type: "DELETE",
+                        //     data: id,
+                        //     success: function (data, status) {
+                        //         tr.remove();
+                        //         return true;
+                        //     },
+                        //     error: function (obj) {
+                        //         return false;
+                        //     }
+                        // })
+                    }
+                });
+            })
+
+
+
+            var tableDoc = $("#individual-document").DataTable({
+                    ajax: "/indidocuments",
                     stateSave: true,
                     columns: [
                         {data: "id", title: "ID"},
-                        {data: "individualName", title: "Họ tên"},
-                        {data: "dob", title: "Ngày sinh"},
-                        {data: "company", title: "Tên công ty"},
-                        {data: "position", title: "Vị trí"},
+                        {data: "docName", title: "Tên tài liệu"},
+                        {data: "docType", title: "Loại tài liệu"},
                         {
                             data: null,
                             className: "center",
                             defaultContent:
-                                "<a href='#' class='btn btn-danger btn-circle editor_remove'><i class='fas fa-trash'></i></a>"
+                                "<div class=\"ui buttons\">\n" +
+                                "  <button class=\"ui red button\" id =\"indi-doc-delete\">Delete</button>\n" +
+                                "  <div class=\"or\"></div>\n" +
+                                "  <button class=\"ui positive button \">Detail</button>\n" +
+                                "</div>"
                         },
-                        {
-                            data: null,
-                            className: "center",
-                            defaultContent:
-                                "<a href='#' class='btn btn-warning btn-circle editor_edit'><i class='fas fa-edit'></i></a>"
-                        }
-                    ]
+                    ],
+                columnDefs: [
+                    {
+                        className: 'dt-body-center'
+                    }
+                ]
                 });
+
+
+            var table = $("#individual").DataTable({
+                ajax: "/individuals",
+                stateSave: true,
+                columns: [
+                    {data: "id", title: "ID"},
+                    {data: "name", title: "Họ tên"},
+                    {data: "dob", title: "Ngày sinh"},
+                    {data: "companyName", title: "Tên công ty"},
+                    {data: "position", title: "Vị trí"},
+                    {
+                        data: null,
+                        className: "center",
+                        defaultContent:
+                            "<div class=\"ui buttons\">\n" +
+                            "  <button class=\"ui red button\" id =\"indi-delete\">Delete</button>\n" +
+                            "  <div class=\"or\"></div>\n" +
+                            "  <button class=\"ui positive button \" id='indi-detail'>Detail</button>\n" +
+                            "</div>"
+                    },
+                ],
+                columnDefs: [
+                    {
+                        className: 'dt-body-center'
+                    }
+                ]
+            });
         })
     </script>
 </head>
@@ -39,7 +154,24 @@
     <th:block th:insert="/fragments/layout :: layout"></th:block>
 
     <div class="ui segment">
+        <div class="ui two top large undetached buttons">
+            <button class="ui red button" id="add-user">
+                <i class="add user icon"></i>
+                Thêm thông tin cá nhân
+            </button>
+            <div class="or"></div>
+            <div class="ui olive large undetached button" id="add-doc">
+                <i class="add book icon"></i>
+                Thêm giấy tờ
+            </div>
+        </div>
+        <div class="ui horizontal divider">
+            DANH SÁCH CÁ NHÂN
+        </div>
 
+        <!--<div class="ui horizontal divider">-->
+            <!--DANH SÁCH GIẤY TỜ-->
+        <!--</div>-->
         <div class="ui top attached tabular menu">
             <a class="active item" data-tab="first">Danh sách thông tin cá nhân</a>
             <a class="item" data-tab="second">Danh sách giấy tờ, hồ sơ cá nhân</a>
@@ -47,46 +179,34 @@
         <div class="ui bottom attached active tab segment" data-tab="first">
             <table class="ui red table" id="individual">
                 <thead>
-                <tr><th>Food</th>
+                <tr>
+                    <th>Food</th>
                     <th>Calories</th>
                     <th>Protein</th>
-                </tr></thead><tbody>
-            <tr>
-                <td>Apples</td>
-                <td>200</td>
-                <td>0g</td>
-            </tr>
-            <tr>
-                <td>Orange</td>
-                <td>310</td>
-                <td>0g</td>
-            </tr>
-            </tbody>
+                    <th>Protein</th>
+                    <th>Protein</th>
+                    <th>Action</th>
+                    <!--<th>Protein</th>-->
+                </tr>
+                </thead>
             </table>
         </div>
         <div class="ui bottom attached  tab segment" data-tab="second">
-            <table class="ui olive table">
+            <table class="ui olive table" id ="individual-document">
                 <thead>
-                <tr><th>Food</th>
+                <tr>
+                    <th>Food</th>
                     <th>Calories</th>
                     <th>Protein</th>
-                </tr></thead><tbody>
-            <tr>
-                <td>Apples</td>
-                <td>200</td>
-                <td>0g</td>
-            </tr>
-            <tr>
-                <td>Orange</td>
-                <td>310</td>
-                <td>0g</td>
-            </tr>
-            </tbody>
+                    <th>Action</th>
+                </tr>
+                </thead>
             </table>
         </div>
-
-
     </div>
+    <th:block th:insert="/fragments/modal :: modal-delete"></th:block>
+    <th:block th:insert="/fragments/modal :: modal-create"></th:block>
+    <th:block th:insert="/fragments/modal :: modal-indi-detail"></th:block>
 </div>
 </body>
 </html>

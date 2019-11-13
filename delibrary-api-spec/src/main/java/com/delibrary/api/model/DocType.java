@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * Gets or Sets DocType
  */
 public enum DocType {
-  VALIDATED("VALIDATED"),
+    VALIDATED("VALIDATED"),
     ORIGINAL("ORIGINAL");
 
   private String value;

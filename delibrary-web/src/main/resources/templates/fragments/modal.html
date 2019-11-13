@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/fragments/head :: head"></th:block>
+</head>
+<body>
+
+<div  th:fragment="modal-create" class="ui modal" id ="create">
+    <i class="close icon"></i>
+    <div class="header">
+        Create new Individual
+    </div>
+    <div class="image content">
+        <div class="description">
+            <div class="ui equal width form">
+                <div class="fields">
+                    <div class="field">
+                        <label>Tên</label>
+                        <input type="text" placeholder="Tên" id="name">
+                    </div>
+                    <div class="field">
+                        <label>Ngày sinh</label>
+                        <input type="text" placeholder="Ngày sinh" id="dob">
+                    </div>
+                </div>
+                <div class="fields">
+                    <div class="field">
+                        <label>Tên công ty</label>
+                        <input type="text" placeholder="Tên công ty" id="company-name">
+                    </div>
+                    <div class="field">
+                        <label>Vị trí</label>
+                        <input type="text" placeholder="Vị trí" id="position">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Huỷ
+        </div>
+        <div class="ui positive right labeled icon button">
+            Tạo người dùng mới
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<div th:fragment="modal-delete" class="ui modal" id="delete">
+    <i class="close icon"></i>
+    <div class="header">
+       DELETE
+    </div>
+    <div class="image content">
+        <div class="ui medium image">
+            <img src="../../static/images/unfollow.png" th:src="@{images/unfollow.png}">
+        </div>
+        <div class="description">
+            <div class="ui header">Do you really want to delete this man right here?</div>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="ui black deny button">
+            Nope
+        </button>
+        <button class="ui positive right labeled icon button">
+            Yep, get this boi out of here
+            <i class="trash icon"></i>
+        </button>
+    </div>
+</div>
+
+<div th:fragment="modal-indi-detail" class="ui modal" id="indi-detail">
+    <i class="close icon"></i>
+    <div class="header">
+        User detail
+    </div>
+    <div class="image content">
+        <div class="description">
+            <div class="ui equal width form">
+                <div class="ui horizontal divider">
+                    THÔNG TIN CÁ NHÂN
+                </div>
+                <div class="fields">
+                    <div class="field">
+                        <label>Tên</label>
+                        <input type="text" placeholder="Tên" id="name-detail">
+                    </div>
+                    <div class="field">
+                        <label>Ngày sinh</label>
+                        <input type="text" placeholder="Ngày sinh" id="dob-detail">
+                    </div>
+                </div>
+                <div class="fields">
+                    <div class="field">
+                        <label>Tên công ty</label>
+                        <input type="text" placeholder="Tên công ty" id="company-name-detail">
+                    </div>
+                    <div class="field">
+                        <label>Vị trí</label>
+                        <input type="text" placeholder="Vị trí" id="position-detail">
+                    </div>
+                </div>
+            </div>
+            <div class="ui primary right labeled icon button ">
+                Edit
+                <i class="edit icon"></i>
+            </div>
+            <div class="ui horizontal divider">
+                GIẤY TỜ LIÊN QUAN
+            </div>
+            <table class="ui olive table" id ="individual-document-detail">
+                <thead>
+                <tr>
+                    <th>Food</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Cancel
+        </div>
+
+        <div class="ui positive right labeled icon button">
+            Yep
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
