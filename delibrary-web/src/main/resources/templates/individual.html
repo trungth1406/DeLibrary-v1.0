@@ -4,121 +4,12 @@
     <th:block th:insert="/fragments/head :: head"></th:block>
     <script th:inline="javascript">
         $(document).ready(function ($) {
-            $('.menu .item').tab();
-            $("#individual").on("click","button#indi-delete",function (e) {
-                var tr = $(this).closest('tr');
-                var row = table.row(tr);
-                var id = row.data().id;
-                e.preventDefault();
-                $('.ui.modal#delete')
-                    .modal('show').modal({
-                    onDeny: function () {
-                        return true;
-                    },
-                    onApprove : function () {
-                        $.ajax({
-                            url: "/individuals/" + id + "/delete",
-                            type: "DELETE",
-                            data: id,
-                            success: function (data, status) {
-                                tr.remove();
-                                return true;
-                            },
-                            error: function (obj) {
-                                return false;
-                            }
-                        })
-                    }
-                });
-            })
-
-            $("button#add-user").click(function (e) {
-                e.preventDefault();
-                $('.ui.modal#create')
-                    .modal('show').modal({
-                    onDeny: function () {
-                        return true;
-                    },
-                    onApprove : function () {
-                        var request = {
-                            "name" : $("#name").val(),
-                            "dob" : $("#dob").val(),
-                            "position" : $("#position").val(),
-                            "companyName" : $("#company-name").val()
-                        }
-                        $.ajax({
-                            url: "/individuals",
-                            type: "POST",
-                            data: JSON.stringify(request),
-                            contentType : "application/json; charset=utf-8",
-                            success: function (data, status) {
-                                tableDoc.ajax.reload();
-                                return true;
-                            },
-                            error: function (obj) {
-                                return false;
-                            }
-                        })
-                    }
-                });
-            })
 
 
-            $("#individual").on("click","button#indi-detail",function (e) {
-                var tr = $(this).closest('tr');
-                var row = table.row(tr);
-                var id = row.data().id;
-                e.preventDefault();
-                $('.ui.modal#indi-detail')
-                    .modal('show').modal({
-                    onDeny: function () {
-                        return true;
-                    },
-                    onApprove : function () {
-                        // $.ajax({
-                        //     url: "/individuals/" + id + "/delete",
-                        //     type: "DELETE",
-                        //     data: id,
-                        //     success: function (data, status) {
-                        //         tr.remove();
-                        //         return true;
-                        //     },
-                        //     error: function (obj) {
-                        //         return false;
-                        //     }
-                        // })
-                    }
-                });
-            })
-
-
-
-            var tableDoc = $("#individual-document").DataTable({
-                    ajax: "/indidocuments",
-                    stateSave: true,
-                    columns: [
-                        {data: "id", title: "ID"},
-                        {data: "docName", title: "Tên tài liệu"},
-                        {data: "docType", title: "Loại tài liệu"},
-                        {
-                            data: null,
-                            className: "center",
-                            defaultContent:
-                                "<div class=\"ui buttons\">\n" +
-                                "  <button class=\"ui red button\" id =\"indi-doc-delete\">Delete</button>\n" +
-                                "  <div class=\"or\"></div>\n" +
-                                "  <button class=\"ui positive button \">Detail</button>\n" +
-                                "</div>"
-                        },
-                    ],
-                columnDefs: [
-                    {
-                        className: 'dt-body-center'
-                    }
-                ]
-                });
-
-
+            /**
+             *  TABLE
+             * @type {jQuery}
+             */
             var table = $("#individual").DataTable({
                 ajax: "/individuals",
                 stateSave: true,
@@ -145,6 +36,214 @@
                     }
                 ]
             });
+            var tableDoc = $("#individual-document").DataTable({
+                ajax: "/indidocuments",
+                stateSave: true,
+                columns: [
+                    {data: "id", title: "ID"},
+                    {data: "docName", title: "Tên tài liệu"},
+                    {data: "docType", title: "Loại tài liệu"},
+                    {
+                        data: null,
+                        className: "center",
+                        defaultContent:
+                            "<div class=\"ui buttons\">\n" +
+                            "  <button class=\"ui red button\" id =\"indi-doc-delete\">Delete</button>\n" +
+                            "  <div class=\"or\"></div>\n" +
+                            "  <button class=\"ui positive button \">Detail</button>\n" +
+                            "</div>"
+                    }
+                ]
+            });
+
+
+            /**
+             * EVENT
+             */
+            $('.menu .item').tab();
+            $('#accordion-add').accordion();
+            $('#dropdown-doc-name').dropdown();
+            $('#dropdown-doc-type').dropdown();
+            $('#date-of-execution')
+            $('#date-of-signing')
+            $.ajax({
+                type : "GET",
+                url: "/indidocuments",
+                success: function (data) {
+                    var setName = new Set();
+                    var setType = new Set();
+                    $.each(data.data,function (k,v) {
+                        $("#doc-name-item").append('<div class=\"item\" data-value="' + v.docName + '\">' + v.docName +'</div>')
+                        $("#doc-type-item").append('<div class=\"item\" data-value="' + v.docType + '\">' + v.docType +'</div>')
+                    });
+                },
+                error: function (status) {
+                    console.log(status)
+                }
+            });
+
+            $("button#add-user").click(function (e) {
+                e.preventDefault();
+                $('.ui.modal#create')
+                    .modal('show').modal({
+                    onDeny: function () {
+                        return true;
+                    },
+                    onApprove : function () {
+                        var request = {
+                            "name" : $("#name").val(),
+                            "dob" : $("#dob").val(),
+                            "position" : $("#position").val(),
+                            "companyName" : $("#company-name").val()
+                        }
+                        $.ajax({
+                            url: "/individuals",
+                            type: "POST",
+                            data: JSON.stringify(request),
+                            contentType : "application/json; charset=utf-8",
+                            success: function (data, status) {
+                                console.log("Success")
+                                table.ajax.reload();
+                                return true;
+                            },
+                            error: function (obj) {
+                                return false;
+                            }
+                        })
+                    }
+                });
+            })
+            $("#individual").on("click","button#indi-delete",function (e) {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                var id = row.data().id;
+                e.preventDefault();
+                $('.ui.modal#delete')
+                    .modal('show').modal({
+                    onDeny: function () {
+                        return true;
+                    },
+                    onApprove : function () {
+                        $.ajax({
+                            url: "/individuals/" + id + "/delete",
+                            type: "DELETE",
+                            data: id,
+                            success: function (data, status) {
+                                tr.remove();
+                                return true;
+                            },
+                            error: function (obj) {
+                                return false;
+                            }
+                        })
+                    }
+                });
+            })
+            $("#individual").on("click","button#indi-detail",function (e) {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                var id = row.data().id;
+                e.preventDefault();
+                $('.ui.modal#indi-detail')
+                    .modal({
+                        width: 1480
+                    })
+                    .modal('show', function(){
+                        $("#id-detail").val(id)
+                        $("#name-detail").val(row.data().name)
+                        $("#dob-detail").val(row.data().dob)
+                        $("#company-name-detail").val(row.data().companyName)
+                        $("#position-detail").val(row.data().position)
+
+                        var tableDetail = $("#individual-document-detail").DataTable({
+                            ajax: "/indimappings/individual?id=" + id,
+                            stateSave: true,
+                            columnDefs : [
+                                {
+                                    targets: [0],
+                                    visible: false
+                                }
+                            ],
+                            columns: [
+                                {data: "id", title: "ID"},
+                                {data: "docName", title: "Tên tài liệu"},
+                                {data: "docType", title: "Loại tài liệu"},
+                                {data: "dateOfExecution", title: "Ngày thực hiện"},
+                                {data: "dateOfSigning", title: "Ngày công chứng"},
+                                {data: "numOfDoc", title: "Số lượng tài liệu"},
+                                // {data: "content", title: "Nội dung"},
+                                {data: "note", title: "Note"},
+                                {
+                                    data: null,
+                                    className: "center",
+                                    defaultContent:
+                                        "<div class=\"ui buttons\">" +
+                                        "  <button class=\"ui red icon button\" id =\"indi-doc-delete\"><i class='delete icon'></i></button>" +
+                                        "  <div class=\"or\"></div>" +
+                                        "  <button class=\"ui primary icon button \"><i class='edit icon'></i></button>" +
+                                        "</div>"
+                                }
+                            ]
+                        })
+                    }).modal({
+                    onApprove : function () {
+                        $("#individual-document-detail").dataTable().fnDestroy();
+                        $("#name-detail").prop('disabled',true)
+                        $("#dob-detail").prop('disabled',true)
+                        $("#company-name-detail").prop('disabled',true)
+                        $("#position-detail").prop('disabled',true)
+                        $("#confirm-update").prop('disabled',true)
+                        return true;
+                    }
+                });
+
+
+            })
+            $("#enable-edit").on("click",function () {
+                if($("#confirm-update").prop('disabled')){
+                    $("#name-detail").prop('disabled',false)
+                    $("#dob-detail").prop('disabled',false)
+                    $("#company-name-detail").prop('disabled',false)
+                    $("#position-detail").prop('disabled',false)
+                    $("#confirm-update").prop('disabled',false)
+                }else{
+                    $("#name-detail").prop('disabled',true)
+                    $("#dob-detail").prop('disabled',true)
+                    $("#company-name-detail").prop('disabled',true)
+                    $("#position-detail").prop('disabled',true)
+                    $("#confirm-update").prop('disabled',true)
+                }
+            })
+            $("#confirm-update").on('click',function () {
+                var request = {
+                    //TODO: Add data here
+                    "name" : $("#name-detail").val(),
+                    "dob" : $("#dob-detail").val(),
+                    "companyName" : $("#company-name-detail").val(),
+                    "position" : $("#position-detail").val()
+                }
+
+                $.ajax({
+                    url: "/individuals/" + $("#id-detail").val() + "/edit",
+                    type: "PATCH",
+                    data: JSON.stringify(request),
+                    contentType : "application/json; charset=utf-8",
+                    success: function (data, status) {
+                        $("#name-detail").prop('disabled',true)
+                        $("#dob-detail").prop('disabled',true)
+                        $("#company-name-detail").prop('disabled',true)
+                        $("#position-detail").prop('disabled',true)
+                        $("#confirm-update").prop('disabled',true)
+                        table.ajax.reload();
+                        return true;
+                    },
+                    error: function (obj) {
+                        return false;
+                    }
+                })
+            })
+            $("#submit-add-mapping").on('click')
+
         })
     </script>
 </head>
@@ -154,6 +253,7 @@
     <th:block th:insert="/fragments/layout :: layout"></th:block>
 
     <div class="ui segment">
+
         <div class="ui two top large undetached buttons">
             <button class="ui red button" id="add-user">
                 <i class="add user icon"></i>
@@ -186,7 +286,6 @@
                     <th>Protein</th>
                     <th>Protein</th>
                     <th>Action</th>
-                    <!--<th>Protein</th>-->
                 </tr>
                 </thead>
             </table>

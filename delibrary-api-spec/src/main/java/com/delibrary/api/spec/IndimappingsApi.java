@@ -56,7 +56,7 @@ public interface IndimappingsApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 500, message = "Server Error") })
-    @RequestMapping(value = "/indimappings",
+    @RequestMapping(value = "/indimappings/individual",
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
@@ -104,6 +104,33 @@ public interface IndimappingsApi {
     }
 
 
+    @ApiOperation(value = "Find mapping by Id", nickname = "findMappingById", notes = "Find records of documentMapping", response = IndiMappingModelResponse.class, tags={ "IndDoc Mapping", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Successful Operation", response = IndiMappingModelResponse.class),
+        @ApiResponse(code = 400, message = "Invalid input data", response = ErrorResponse.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 500, message = "Server Error") })
+    @RequestMapping(value = "/indimappings/individual",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    default ResponseEntity<IndiMappingModelResponse> findMappingById(@NotNull @ApiParam(value = "Find mapping by individual's Id", required = true) @Valid @RequestParam(value = "id", required = true) Integer id) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\",\n    \"content\" : \"content\"\n  }, {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\",\n    \"content\" : \"content\"\n  } ]\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default IndimappingsApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
     @ApiOperation(value = "Get list of mappings", nickname = "getAllMapping", notes = "Get all information of mapping", response = IndiMappingModelResponse.class, tags={ "IndDoc Mapping", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Successful Operation", response = IndiMappingModelResponse.class),
@@ -118,7 +145,7 @@ public interface IndimappingsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\"\n  }\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\",\n    \"content\" : \"content\"\n  }, {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\",\n    \"content\" : \"content\"\n  } ]\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

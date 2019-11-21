@@ -36,6 +36,12 @@ public class IndiMappingModel   {
   @JsonProperty("dateOfSigning")
   private String dateOfSigning = null;
 
+  @JsonProperty("content")
+  private String content = null;
+
+  @JsonProperty("note")
+  private String note = null;
+
   public IndiMappingModel id(String id) {
     this.id = id;
     return this;
@@ -170,6 +176,44 @@ public class IndiMappingModel   {
     this.dateOfSigning = dateOfSigning;
   }
 
+  public IndiMappingModel content(String content) {
+    this.content = content;
+    return this;
+  }
+
+  /**
+   * Get content
+   * @return content
+  **/
+  @ApiModelProperty(value = "")
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public IndiMappingModel note(String note) {
+    this.note = note;
+    return this;
+  }
+
+  /**
+   * Get note
+   * @return note
+  **/
+  @ApiModelProperty(value = "")
+
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -186,12 +230,14 @@ public class IndiMappingModel   {
         Objects.equals(this.docType, indiMappingModel.docType) &&
         Objects.equals(this.numOfDoc, indiMappingModel.numOfDoc) &&
         Objects.equals(this.dateOfExecution, indiMappingModel.dateOfExecution) &&
-        Objects.equals(this.dateOfSigning, indiMappingModel.dateOfSigning);
+        Objects.equals(this.dateOfSigning, indiMappingModel.dateOfSigning) &&
+        Objects.equals(this.content, indiMappingModel.content) &&
+        Objects.equals(this.note, indiMappingModel.note);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, indiname, docName, docType, numOfDoc, dateOfExecution, dateOfSigning);
+    return Objects.hash(id, indiname, docName, docType, numOfDoc, dateOfExecution, dateOfSigning, content, note);
   }
 
   @Override
@@ -206,6 +252,8 @@ public class IndiMappingModel   {
     sb.append("    numOfDoc: ").append(toIndentedString(numOfDoc)).append("\n");
     sb.append("    dateOfExecution: ").append(toIndentedString(dateOfExecution)).append("\n");
     sb.append("    dateOfSigning: ").append(toIndentedString(dateOfSigning)).append("\n");
+    sb.append("    content: ").append(toIndentedString(content)).append("\n");
+    sb.append("    note: ").append(toIndentedString(note)).append("\n");
     sb.append("}");
     return sb.toString();
   }

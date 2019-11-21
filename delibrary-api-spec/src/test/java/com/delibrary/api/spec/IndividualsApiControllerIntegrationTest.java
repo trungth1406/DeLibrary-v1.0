@@ -46,7 +46,7 @@ public class IndividualsApiControllerIntegrationTest {
 
     @Test
     public void updateIndividualTest() throws Exception {
-        ResponseEntity<ResponseMessage> responseEntity = api.updateIndividual(null);
+        ResponseEntity<ResponseMessage> responseEntity = api.updateIndividual(null,null);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 

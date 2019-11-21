@@ -3,6 +3,7 @@ package com.delibrary.dao.service.impl;
 import com.delibrary.api.model.IndividualModel;
 import com.delibrary.api.model.IndividualModelRequest;
 import com.delibrary.dao.entity.IndividualEntity;
+import com.delibrary.dao.repository.DocumentMappingCriteriaRepository;
 import com.delibrary.dao.repository.IndividualRepository;
 import com.delibrary.dao.service.IndividualService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class IndividualServiceImpl implements IndividualService {
 
     @Autowired
     private IndividualRepository  individualRepository;
+
     private SimpleDateFormat dateFormatFromDb = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat dateFormatToDb = new SimpleDateFormat("yyyy-MM-dd");
 

@@ -26,7 +26,7 @@ public class IndividualEntity implements Serializable {
     private String position;
     @Column(name = "company_name")
     private String companyName;
-    @OneToMany(mappedBy = "indvEntity", fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = true)
+    @OneToMany(mappedBy = "indvEntity")
     private List<IndividualDocumentMappingEntity> documents;
 
     public IndividualEntity() {

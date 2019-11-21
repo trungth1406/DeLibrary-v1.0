@@ -140,8 +140,9 @@ public interface IndividualsApi {
         @ApiResponse(code = 500, message = "Server Error") })
     @RequestMapping(value = "/individuals/{id}/edit",
         produces = { "application/json" }, 
+        consumes = { "application/json" },
         method = RequestMethod.PATCH)
-    default ResponseEntity<ResponseMessage> updateIndividual(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") Integer id) {
+    default ResponseEntity<ResponseMessage> updateIndividual(@ApiParam(value = "Individual Id",required=true) @PathVariable("id") Integer id,@ApiParam(value = ""  )  @Valid @RequestBody IndividualModelRequest body) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {

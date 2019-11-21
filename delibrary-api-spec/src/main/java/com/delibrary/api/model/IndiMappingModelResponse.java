@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -16,10 +18,19 @@ import javax.validation.constraints.*;
 @Validated
 public class IndiMappingModelResponse   {
   @JsonProperty("data")
-  private IndiMappingModel data = null;
+  @Valid
+  private List<IndiMappingModel> data = null;
 
-  public IndiMappingModelResponse data(IndiMappingModel data) {
+  public IndiMappingModelResponse data(List<IndiMappingModel> data) {
     this.data = data;
+    return this;
+  }
+
+  public IndiMappingModelResponse addDataItem(IndiMappingModel dataItem) {
+    if (this.data == null) {
+      this.data = new ArrayList<>();
+    }
+    this.data.add(dataItem);
     return this;
   }
 
@@ -28,13 +39,12 @@ public class IndiMappingModelResponse   {
    * @return data
   **/
   @ApiModelProperty(value = "")
-
   @Valid
-  public IndiMappingModel getData() {
+  public List<IndiMappingModel> getData() {
     return data;
   }
 
-  public void setData(IndiMappingModel data) {
+  public void setData(List<IndiMappingModel> data) {
     this.data = data;
   }
 

@@ -70,69 +70,166 @@
     </div>
 </div>
 
-<div th:fragment="modal-indi-detail" class="ui modal" id="indi-detail">
+<div th:fragment="modal-indi-detail" class="ui fullscreen  long modal" id="indi-detail">
+        <i class="close icon"></i>
+        <div class="header">
+            User detail
+        </div>
+        <div class="  content">
+            <div class="ui grid">
+
+                    <div class=" six wide column">
+                        <div class="ui segment">
+                        <div class="ui equal width form">
+                            <div class="ui horizontal divider">
+                                THÔNG TIN CÁ NHÂN
+                            </div>
+
+                            <div class="fields">
+                                <input type="hidden" placeholder="Tên" id="id-detail" >
+                                <div class="field">
+                                    <label>Tên</label>
+                                    <input type="text" placeholder="Tên" id="name-detail" disabled>
+                                </div>
+                                <div class="field">
+                                    <label>Ngày sinh</label>
+                                    <input type="text" placeholder="Ngày sinh" id="dob-detail" disabled>
+                                </div>
+                            </div>
+                            <div class="fields">
+                                <div class="field">
+                                    <label>Tên công ty</label>
+                                    <input type="text" placeholder="Tên công ty" id="company-name-detail" disabled>
+                                </div>
+                                <div class="field">
+                                    <label>Vị trí</label>
+                                    <input type="text" placeholder="Vị trí" id="position-detail" disabled>
+                                </div>
+                            </div>
+                            <div class="center labeled">
+                                <button class="ui primary right aligned icon button " id="enable-edit">
+                                    Chỉnh sửa
+                                    <i class="edit icon"></i>
+                                </button>
+                                <button class="ui positive right aligned icon button" id="confirm-update" disabled>
+                                    Xác nhận chỉnh sửa
+                                    <i class="checkmark icon"></i>
+                                </button>
+                            </div>
+                       </div>
+                    </div>
+                        <th:block th:insert="/fragments/accordion :: accor-new-mapping"></th:block>
+                </div>
+                      <div class=" ten wide column">
+                          <div class="ui segment">
+                            <div class="image content">
+                               <div class="description">
+                                <div class="ui horizontal divider">
+                                    DANH SÁCH GIẤY TỜ LIÊN QUAN
+                                </div>
+                                <table class="ui olive table" id ="individual-document-detail">
+                                    <thead>
+                                    <tr>
+                                        <th>Food</th>
+                                        <th>Calories</th>
+                                        <th>Protein</th>
+                                        <th>Action</th>
+                                        <th>Action</th>
+                                        <th>Action</th>
+                                        <th>Action</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+        </div>
+    <div class="actions">
+        <button class="ui positive right labeled icon button" id="cancel-detail">
+            <i class="check-double icon"></i>
+            Hoàn thành chỉnh sửa
+        </button>
+    </div>
+
+</div>
+
+
+<div  th:fragment="modal-add-doc" class="ui modal" id ="add-document">
     <i class="close icon"></i>
     <div class="header">
-        User detail
+        Create new Individual document
     </div>
     <div class="image content">
         <div class="description">
             <div class="ui equal width form">
-                <div class="ui horizontal divider">
-                    THÔNG TIN CÁ NHÂN
-                </div>
                 <div class="fields">
                     <div class="field">
                         <label>Tên</label>
-                        <input type="text" placeholder="Tên" id="name-detail">
+                        <input type="text" placeholder="Tên tài liệu" id="doc-name">
                     </div>
                     <div class="field">
-                        <label>Ngày sinh</label>
-                        <input type="text" placeholder="Ngày sinh" id="dob-detail">
+                        <label>Loại tài liệu</label>
+                        <input type="text" placeholder="Loại tài liệu" id="doc-type">
                     </div>
                 </div>
                 <div class="fields">
                     <div class="field">
-                        <label>Tên công ty</label>
-                        <input type="text" placeholder="Tên công ty" id="company-name-detail">
+                        <label>Số lượng tài liệu</label>
+                        <input type="text" placeholder="Tên công ty" id="number-of-doc">
                     </div>
                     <div class="field">
-                        <label>Vị trí</label>
-                        <input type="text" placeholder="Vị trí" id="position-detail">
+                        <label>Ngày thực hiện </label>
+                        <input type="text" placeholder="dd-mm-yyyy" id="date-of-exe">
+                    </div>
+                    <div class="field">
+                        <label>Ngày công chứng </label>
+                        <input type="text" placeholder="dd-mm-yyyy" id="date-of-signing">
                     </div>
                 </div>
             </div>
-            <div class="ui primary right labeled icon button ">
-                Edit
-                <i class="edit icon"></i>
-            </div>
-            <div class="ui horizontal divider">
-                GIẤY TỜ LIÊN QUAN
-            </div>
-            <table class="ui olive table" id ="individual-document-detail">
-                <thead>
-                <tr>
-                    <th>Food</th>
-                    <th>Calories</th>
-                    <th>Protein</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-            </table>
         </div>
     </div>
     <div class="actions">
         <div class="ui black deny button">
-            Cancel
+            Huỷ
         </div>
-
         <div class="ui positive right labeled icon button">
-            Yep
+            Tạo người dùng mới
             <i class="checkmark icon"></i>
         </div>
     </div>
 </div>
 
+<div  th:fragment="modal-add-mapping" class="ui tiny modal" id ="modal-add-mapping">
+    <i class="close icon"></i>
+    <div class="header">
+        Profile Picture
+    </div>
+    <div class="image content">
+        <div class="ui medium image">
+            <img src="/images/avatar/large/chris.jpg">
+        </div>
+        <div class="description">
+            <div class="ui header">We've auto-chosen a profile image for you.</div>
+            <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+            <p>Is it okay to use this photo?</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Nope
+        </div>
+        <div class="ui positive right labeled icon button">
+            Yep, that's me
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
 
 
 </body>

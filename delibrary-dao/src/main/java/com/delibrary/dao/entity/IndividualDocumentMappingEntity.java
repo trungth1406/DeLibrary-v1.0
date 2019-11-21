@@ -17,7 +17,7 @@ public class IndividualDocumentMappingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = IndividualDocumentEntity.class)
     @JoinColumn(name = "doc_id", referencedColumnName = "id")
     private IndividualDocumentEntity indvDocEntity;
@@ -37,8 +37,9 @@ public class IndividualDocumentMappingEntity implements Serializable {
     @Column(name = "content")
     private String content;
 
-
-    public IndividualDocumentMappingEntity() {
+    public IndividualDocumentMappingEntity(Date dateOfExecution, String type,String a) {
+        this.dateOfExecution = dateOfExecution;
+        this.type = type;
 
     }
 

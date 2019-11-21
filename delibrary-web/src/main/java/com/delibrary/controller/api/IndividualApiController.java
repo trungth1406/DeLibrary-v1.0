@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -58,7 +60,19 @@ public class IndividualApiController implements IndividualsApi {
     }
 
     @Override
-    public ResponseEntity<ResponseMessage> updateIndividual(Integer id) {
-        return null;
+    public ResponseEntity<ResponseMessage> updateIndividual(Integer id, IndividualModelRequest body) {
+        IndividualModel model = new IndividualModel();
+        try {
+            model.setId(id);
+            model.setName(body.getName());
+            model.setCompanyName(body.getCompanyName());
+            model.setPosition(body.getPosition());
+            model.setDob(body.getDob());
+            individualService.edit(model);
+            return new ResponseEntity(new ResponseMessage().description("Update ok"),HttpStatus.OK);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
