@@ -20,58 +20,56 @@
             <div class="field">
                 <label>Tên tài liệu</label>
                 <div class="ui selection dropdown" id="dropdown-doc-name">
-                    <input type="hidden" name="docname">
+                    <!--<input type="hidden" name="docname">-->
                     <i class="dropdown icon"></i>
                     <div class="default text">Tên tài liệu</div>
                     <div class="menu" id="doc-name-item">
-                        <div class="item" data-value="1">--Select one--</div>
+                        <div class="item" data-value="">--Select one--</div>
                     </div>
                 </div>
             </div>
             <div class="field">
-                <label>Loại tài liệu</label>
-                <div class="ui selection dropdown" id="dropdown-doc-type">
-                    <input type="hidden" name="doctype">
-                    <i class="dropdown icon"></i>
-                    <div class="default text">Loại tài liệu</div>
-                    <div class="menu" id="doc-type-item">
-                        <div class="item" data-value="1">--Select one--</div>
+                <div class="default text">Loại tài liệu</div>
+                <div class="ui input" id="doc-type">
+                    <div class="ui input left icon">
+                        <i class="bookmark icon"></i>
+                        <input type="text" placeholder="Document type">
                     </div>
                 </div>
             </div>
             <div class="field">
-                <div class="ui calendar" id="date-of-execution">
+                <div class="ui calendar" >
                     <div class="default text">Date of execution</div>
                     <div class="ui input left icon">
                         <i class="calendar icon"></i>
-                        <input type="date" placeholder="Date">
+                        <input type="date" id="date-of-execution" placeholder="Date">
                     </div>
                 </div>
             </div>
             <div class="field">
                 <div class="default text">Date of signing</div>
-                <div class="ui calendar" id="date-of-signing">
+                <div class="ui calendar" >
                     <div class="ui input left icon">
                         <i class="calendar icon"></i>
-                        <input type="date" placeholder="Date">
+                        <input type="date" id="date-of-signing" placeholder="Date">
                     </div>
                 </div>
             </div>
             <div class="field">
                 <div class="default text">Number of document</div>
-                <div class="ui input" id="num-of-doc">
+                <div class="ui input" >
                     <div class="ui input left icon">
-                        <i class="numbered icon"></i>
-                        <input type="number" placeholder="Number of documents">
+                        <i class="number icon"></i>
+                        <input type="number" id="num-of-doc" placeholder="Number of documents">
                     </div>
                 </div>
             </div>
             <div class="field">
-                <div class="default text">Number of document</div>
-                <div class="ui input" id="doc-note">
+                <div class="default text">Note</div>
+                <div class="ui input" >
                     <div class="ui input left icon">
-                        <i class="note icon"></i>
-                        <input type="text" placeholder="Note">
+                        <i class="bookmark icon"></i>
+                        <input type="text" id="doc-note" placeholder="Note">
                     </div>
                 </div>
             </div>

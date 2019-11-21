@@ -1,17 +1,21 @@
 package com.delibrary.dao.service.impl;
 
-import com.delibrary.api.model.DocType;
 import com.delibrary.api.model.IndiMappingModel;
 import com.delibrary.dao.entity.IndiMappingEntity;
-import com.delibrary.dao.entity.IndividualDocumentMappingEntity;
+import com.delibrary.dao.entity.IndiMappingPersistEntity;
+import com.delibrary.dao.repository.DocMappingJpaRepository;
 import com.delibrary.dao.repository.DocumentMappingCriteriaRepository;
 import com.delibrary.dao.repository.IndividualDocumentMappingRepository;
 import com.delibrary.dao.service.IndividualDocumentMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,14 +24,27 @@ public class IndividualDocumentMappingServiceImpl  implements IndividualDocument
     @Autowired
     private IndividualDocumentMappingRepository repository;
     @Autowired
+    private EntityManager entityManager;
+    @Autowired
     private DocumentMappingCriteriaRepository mappingCriteriaRepository;
+    @Autowired
+    private DocMappingJpaRepository mappingJpaRepository;
+
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat dfToDb = new SimpleDateFormat("yyyy-mm-dd");
 
-
-
+    @Transactional
     @Override
-    public void createNewMapping(IndiMappingModel model) {
-
+    public void createNewMapping(IndiMappingModel model) throws ParseException {
+        IndiMappingPersistEntity entity = new IndiMappingPersistEntity();
+        entity.setIndividualId(model.getIndiId());
+        entity.setDocId(model.getDocId());
+        entity.setNumberOfDoc(model.getNumOfDoc() );
+        entity.setNote(model.getNote());
+        entity.setDateOfExecution(model.getDateOfExecution() == ""?  null :dfToDb.parse(model.getDateOfExecution()));
+        entity.setDateOfSigning(model.getDateOfSigning() == "" ? null : dfToDb.parse(model.getDateOfSigning()));
+        entity.setDocType(model.getDocType());
+        entityManager.persist(entity);
     }
 
     @Override
@@ -36,14 +53,12 @@ public class IndividualDocumentMappingServiceImpl  implements IndividualDocument
     }
 
     @Override
-    public void delete(IndiMappingModel model) {
-
+    public void delete(Long id) {
+        mappingJpaRepository.deleteById(id);
     }
 
     @Override
     public List<IndiMappingModel> findById(long id) {
-
-//        List<IndiMappingEntity> entities = repository.searchRelatedDocument(id);
         List<IndiMappingEntity> entities = mappingCriteriaRepository.searchWithCriteriaBuilder(id);
         List<IndiMappingModel> models = new ArrayList<>();
         IndiMappingModel model;
@@ -51,11 +66,10 @@ public class IndividualDocumentMappingServiceImpl  implements IndividualDocument
             model = new IndiMappingModel();
             model.setId(String.valueOf(item.getId()));
             model.setDocName(item.getDocName());
-            model.setDocType(DocType.valueOf(item.getDocCode()));
-            model.setNumOfDoc((int) item.getNumberOfDoc());
+            model.setDocType(item.getDocCode());
+            model.setNumOfDoc( item.getNumberOfDoc());
             model.setDateOfExecution(item.getDateOfExecution() == null ? null : sdf.format(item.getDateOfExecution()));
             model.setDateOfSigning(item.getDateOfSigning() == null? null : sdf.format(item.getDateOfSigning()));
-//            model.setContent(item.getContent());
             model.setNote(item.getNote());
             models.add(model);
         }

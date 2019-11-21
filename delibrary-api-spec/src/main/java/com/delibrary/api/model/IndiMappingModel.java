@@ -1,7 +1,6 @@
 package com.delibrary.api.model;
 
 import java.util.Objects;
-import com.delibrary.api.model.DocType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -18,17 +17,20 @@ public class IndiMappingModel   {
   @JsonProperty("id")
   private String id = null;
 
-  @JsonProperty("indiname")
-  private String indiname = null;
+  @JsonProperty("indiId")
+  private Integer indiId = null;
 
   @JsonProperty("docName")
   private String docName = null;
 
+  @JsonProperty("docId")
+  private Integer docId = null;
+
   @JsonProperty("docType")
-  private DocType docType = null;
+  private String docType = null;
 
   @JsonProperty("numOfDoc")
-  private Integer numOfDoc = null;
+  private Long numOfDoc = null;
 
   @JsonProperty("dateOfExecution")
   private String dateOfExecution = null;
@@ -61,23 +63,23 @@ public class IndiMappingModel   {
     this.id = id;
   }
 
-  public IndiMappingModel indiname(String indiname) {
-    this.indiname = indiname;
+  public IndiMappingModel indiId(Integer indiId) {
+    this.indiId = indiId;
     return this;
   }
 
   /**
-   * Get indiname
-   * @return indiname
+   * Get indiId
+   * @return indiId
   **/
   @ApiModelProperty(value = "")
 
-  public String getIndiname() {
-    return indiname;
+  public Integer getIndiId() {
+    return indiId;
   }
 
-  public void setIndiname(String indiname) {
-    this.indiname = indiname;
+  public void setIndiId(Integer indiId) {
+    this.indiId = indiId;
   }
 
   public IndiMappingModel docName(String docName) {
@@ -99,7 +101,26 @@ public class IndiMappingModel   {
     this.docName = docName;
   }
 
-  public IndiMappingModel docType(DocType docType) {
+  public IndiMappingModel docId(Integer docId) {
+    this.docId = docId;
+    return this;
+  }
+
+  /**
+   * Get docId
+   * @return docId
+  **/
+  @ApiModelProperty(value = "")
+
+  public Integer getDocId() {
+    return docId;
+  }
+
+  public void setDocId(Integer docId) {
+    this.docId = docId;
+  }
+
+  public IndiMappingModel docType(String docType) {
     this.docType = docType;
     return this;
   }
@@ -110,16 +131,15 @@ public class IndiMappingModel   {
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
-  public DocType getDocType() {
+  public String getDocType() {
     return docType;
   }
 
-  public void setDocType(DocType docType) {
+  public void setDocType(String docType) {
     this.docType = docType;
   }
 
-  public IndiMappingModel numOfDoc(Integer numOfDoc) {
+  public IndiMappingModel numOfDoc(Long numOfDoc) {
     this.numOfDoc = numOfDoc;
     return this;
   }
@@ -130,11 +150,11 @@ public class IndiMappingModel   {
   **/
   @ApiModelProperty(value = "")
 
-  public Integer getNumOfDoc() {
+  public Long getNumOfDoc() {
     return numOfDoc;
   }
 
-  public void setNumOfDoc(Integer numOfDoc) {
+  public void setNumOfDoc(Long numOfDoc) {
     this.numOfDoc = numOfDoc;
   }
 
@@ -225,8 +245,9 @@ public class IndiMappingModel   {
     }
     IndiMappingModel indiMappingModel = (IndiMappingModel) o;
     return Objects.equals(this.id, indiMappingModel.id) &&
-        Objects.equals(this.indiname, indiMappingModel.indiname) &&
+        Objects.equals(this.indiId, indiMappingModel.indiId) &&
         Objects.equals(this.docName, indiMappingModel.docName) &&
+        Objects.equals(this.docId, indiMappingModel.docId) &&
         Objects.equals(this.docType, indiMappingModel.docType) &&
         Objects.equals(this.numOfDoc, indiMappingModel.numOfDoc) &&
         Objects.equals(this.dateOfExecution, indiMappingModel.dateOfExecution) &&
@@ -237,7 +258,7 @@ public class IndiMappingModel   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, indiname, docName, docType, numOfDoc, dateOfExecution, dateOfSigning, content, note);
+    return Objects.hash(id, indiId, docName, docId, docType, numOfDoc, dateOfExecution, dateOfSigning, content, note);
   }
 
   @Override
@@ -246,8 +267,9 @@ public class IndiMappingModel   {
     sb.append("class IndiMappingModel {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    indiname: ").append(toIndentedString(indiname)).append("\n");
+    sb.append("    indiId: ").append(toIndentedString(indiId)).append("\n");
     sb.append("    docName: ").append(toIndentedString(docName)).append("\n");
+    sb.append("    docId: ").append(toIndentedString(docId)).append("\n");
     sb.append("    docType: ").append(toIndentedString(docType)).append("\n");
     sb.append("    numOfDoc: ").append(toIndentedString(numOfDoc)).append("\n");
     sb.append("    dateOfExecution: ").append(toIndentedString(dateOfExecution)).append("\n");

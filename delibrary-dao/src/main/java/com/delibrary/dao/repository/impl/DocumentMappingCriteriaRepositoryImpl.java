@@ -1,5 +1,6 @@
 package com.delibrary.dao.repository.impl;
 
+import com.delibrary.api.model.IndiMappingModelRequest;
 import com.delibrary.dao.entity.IndiMappingEntity;
 import com.delibrary.dao.entity.IndividualDocumentMappingEntity;
 import com.delibrary.dao.repository.DocumentMappingCriteriaRepository;
@@ -28,7 +29,7 @@ public class DocumentMappingCriteriaRepositoryImpl implements DocumentMappingCri
         q.multiselect(
                 root.get("id"),
                 root.get("indvDocEntity").get("docName"),
-                root.get("indvDocEntity").get("docCode"),
+                root.get("type"),
                 root.get("numberOfDoc"),
                 root.get("dateOfExecution"),
                 root.get("dateOfSigning"),

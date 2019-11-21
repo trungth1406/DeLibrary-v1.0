@@ -28,7 +28,7 @@ public class IndimappingsApiControllerIntegrationTest {
     @Test
     public void createMappingTest() throws Exception {
         IndiMappingModelRequest body = new IndiMappingModelRequest();
-        ResponseEntity<ResponseMessage> responseEntity = api.createMapping(body);
+        ResponseEntity<ResponseMessage> responseEntity = api.createMapping(null);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 

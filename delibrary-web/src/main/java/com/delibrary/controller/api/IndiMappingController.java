@@ -23,13 +23,25 @@ public class IndiMappingController implements IndimappingsApi {
     private IndividualDocumentMappingService service;
 
     @Override
-    public ResponseEntity<ResponseMessage> createMapping(IndiMappingModelRequest body) {
-        return null;
+    public ResponseEntity<ResponseMessage> createMapping(IndiMappingModel body) {
+        try{
+            service.createNewMapping(body);
+            return  new ResponseEntity(new ResponseMessage().description("OK"),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @Override
     public ResponseEntity<ResponseMessage> deleteMapping(Integer id) {
-        return null;
+        try{
+            service.delete(Long.valueOf(id));
+            return new ResponseEntity(new ResponseMessage().description("Ok"),HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override

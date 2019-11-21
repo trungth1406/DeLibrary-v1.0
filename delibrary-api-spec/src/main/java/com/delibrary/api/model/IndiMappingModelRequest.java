@@ -1,7 +1,6 @@
 package com.delibrary.api.model;
 
 import java.util.Objects;
-import com.delibrary.api.model.DocType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -25,7 +24,7 @@ public class IndiMappingModelRequest   {
   private String docName = null;
 
   @JsonProperty("docType")
-  private DocType docType = null;
+  private String docType = null;
 
   @JsonProperty("numOfDoc")
   private Integer numOfDoc = null;
@@ -93,7 +92,7 @@ public class IndiMappingModelRequest   {
     this.docName = docName;
   }
 
-  public IndiMappingModelRequest docType(DocType docType) {
+  public IndiMappingModelRequest docType(String docType) {
     this.docType = docType;
     return this;
   }
@@ -104,12 +103,11 @@ public class IndiMappingModelRequest   {
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
-  public DocType getDocType() {
+  public String getDocType() {
     return docType;
   }
 
-  public void setDocType(DocType docType) {
+  public void setDocType(String docType) {
     this.docType = docType;
   }
 

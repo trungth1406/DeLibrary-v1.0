@@ -19,13 +19,13 @@ public class IndividualDocumentMappingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = IndividualDocumentEntity.class)
-    @JoinColumn(name = "doc_id", referencedColumnName = "id")
+    @JoinColumn(name = "doc_id", referencedColumnName = "id",nullable =  false)
     private IndividualDocumentEntity indvDocEntity;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = IndividualEntity.class)
     @JoinColumn(name = "individual_id", referencedColumnName = "id",nullable =  false)
     private IndividualEntity indvEntity;
     @Column(name = "number_of_doc")
-    private long numberOfDoc;
+    private Long numberOfDoc;
     @Column(name = "doc_type")
     private String type;
     @Column(name = "date_of_execution")
@@ -41,6 +41,9 @@ public class IndividualDocumentMappingEntity implements Serializable {
         this.dateOfExecution = dateOfExecution;
         this.type = type;
 
+    }
+
+    public IndividualDocumentMappingEntity() {
     }
 
     public String getType() {
@@ -67,11 +70,11 @@ public class IndividualDocumentMappingEntity implements Serializable {
         this.id = id;
     }
 
-    public long getNumberOfDoc() {
+    public Long getNumberOfDoc() {
         return numberOfDoc;
     }
 
-    public void setNumberOfDoc(long numberOfDoc) {
+    public void setNumberOfDoc(Long numberOfDoc) {
         this.numberOfDoc = numberOfDoc;
     }
 

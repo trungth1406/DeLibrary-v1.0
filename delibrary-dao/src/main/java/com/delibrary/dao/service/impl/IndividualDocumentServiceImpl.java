@@ -27,7 +27,7 @@ public class IndividualDocumentServiceImpl implements IndividualDocumentService 
             model = new DocumentModel();
             model.setId(Math.toIntExact(item.getId()));
             model.setDocName(item.getDocName());
-            model.setDocType(DocType.valueOf(item.getDocCode()));
+            model.setDocCode(item.getDocCode());
             models.add(model);
         }
         return models;
@@ -36,7 +36,7 @@ public class IndividualDocumentServiceImpl implements IndividualDocumentService 
     @Override
     public void createDocument(DocumentModel model) {
         IndividualDocumentEntity entity = new IndividualDocumentEntity();
-        entity.setDocCode(model.getDocType().name());
+        entity.setDocCode(model.getDocCode());
         entity.setDocName(model.getDocName());
         individualDocumentRepository.save(entity);
     }
@@ -44,7 +44,7 @@ public class IndividualDocumentServiceImpl implements IndividualDocumentService 
     @Override
     public void updateDocument(DocumentModel model) {
         IndividualDocumentEntity entity = new IndividualDocumentEntity();
-        entity.setDocCode(model.getDocType().name());
+        entity.setDocCode(model.getDocCode());
         entity.setDocName(model.getDocName());
         entity.setId(model.getId());
         individualDocumentRepository.save(entity);

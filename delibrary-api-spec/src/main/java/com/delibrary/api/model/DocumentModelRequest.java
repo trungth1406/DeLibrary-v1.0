@@ -1,7 +1,6 @@
 package com.delibrary.api.model;
 
 import java.util.Objects;
-import com.delibrary.api.model.DocType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -23,7 +22,7 @@ public class DocumentModelRequest   {
   private String docName = null;
 
   @JsonProperty("docType")
-  private DocType docType = null;
+  private String docType = null;
 
   public DocumentModelRequest id(Integer id) {
     this.id = id;
@@ -63,7 +62,7 @@ public class DocumentModelRequest   {
     this.docName = docName;
   }
 
-  public DocumentModelRequest docType(DocType docType) {
+  public DocumentModelRequest docType(String docType) {
     this.docType = docType;
     return this;
   }
@@ -74,12 +73,11 @@ public class DocumentModelRequest   {
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
-  public DocType getDocType() {
+  public String getDocType() {
     return docType;
   }
 
-  public void setDocType(DocType docType) {
+  public void setDocType(String docType) {
     this.docType = docType;
   }
 

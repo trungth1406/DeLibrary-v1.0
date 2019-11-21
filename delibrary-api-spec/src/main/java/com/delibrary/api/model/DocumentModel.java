@@ -1,7 +1,6 @@
 package com.delibrary.api.model;
 
 import java.util.Objects;
-import com.delibrary.api.model.DocType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -22,8 +21,8 @@ public class DocumentModel   {
   @JsonProperty("docName")
   private String docName = null;
 
-  @JsonProperty("docType")
-  private DocType docType = null;
+  @JsonProperty("docCode")
+  private String docCode = null;
 
   public DocumentModel id(Integer id) {
     this.id = id;
@@ -63,24 +62,23 @@ public class DocumentModel   {
     this.docName = docName;
   }
 
-  public DocumentModel docType(DocType docType) {
-    this.docType = docType;
+  public DocumentModel docCode(String docCode) {
+    this.docCode = docCode;
     return this;
   }
 
   /**
-   * Get docType
-   * @return docType
+   * Get docCode
+   * @return docCode
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
-  public DocType getDocType() {
-    return docType;
+  public String getDocCode() {
+    return docCode;
   }
 
-  public void setDocType(DocType docType) {
-    this.docType = docType;
+  public void setDocCode(String docCode) {
+    this.docCode = docCode;
   }
 
 
@@ -95,12 +93,12 @@ public class DocumentModel   {
     DocumentModel documentModel = (DocumentModel) o;
     return Objects.equals(this.id, documentModel.id) &&
         Objects.equals(this.docName, documentModel.docName) &&
-        Objects.equals(this.docType, documentModel.docType);
+        Objects.equals(this.docCode, documentModel.docCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, docName, docType);
+    return Objects.hash(id, docName, docCode);
   }
 
   @Override
@@ -110,7 +108,7 @@ public class DocumentModel   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    docName: ").append(toIndentedString(docName)).append("\n");
-    sb.append("    docType: ").append(toIndentedString(docType)).append("\n");
+    sb.append("    docCode: ").append(toIndentedString(docCode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

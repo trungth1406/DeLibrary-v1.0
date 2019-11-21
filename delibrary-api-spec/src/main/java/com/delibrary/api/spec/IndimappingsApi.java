@@ -6,7 +6,7 @@
 package com.delibrary.api.spec;
 
 import com.delibrary.api.model.ErrorResponse;
-import com.delibrary.api.model.IndiMappingModelRequest;
+import com.delibrary.api.model.IndiMappingModel;
 import com.delibrary.api.model.IndiMappingModelResponse;
 import com.delibrary.api.model.ResponseMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,7 +60,7 @@ public interface IndimappingsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<ResponseMessage> createMapping(@ApiParam(value = ""  )  @Valid @RequestBody IndiMappingModelRequest body) {
+    default ResponseEntity<ResponseMessage> createMapping(@ApiParam(value = ""  )  @Valid @RequestBody IndiMappingModel body) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
@@ -118,7 +118,7 @@ public interface IndimappingsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\",\n    \"content\" : \"content\"\n  }, {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\",\n    \"content\" : \"content\"\n  } ]\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docId\" : 6,\n    \"docType\" : \"docType\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 1,\n    \"id\" : \"id\",\n    \"indiId\" : 0,\n    \"content\" : \"content\"\n  }, {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docId\" : 6,\n    \"docType\" : \"docType\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 1,\n    \"id\" : \"id\",\n    \"indiId\" : 0,\n    \"content\" : \"content\"\n  } ]\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -145,7 +145,7 @@ public interface IndimappingsApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\",\n    \"content\" : \"content\"\n  }, {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docType\" : \"VALIDATED\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 0,\n    \"id\" : \"id\",\n    \"indiname\" : \"indiname\",\n    \"content\" : \"content\"\n  } ]\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{\n  \"data\" : [ {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docId\" : 6,\n    \"docType\" : \"docType\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 1,\n    \"id\" : \"id\",\n    \"indiId\" : 0,\n    \"content\" : \"content\"\n  }, {\n    \"dateOfSigning\" : \"dateOfSigning\",\n    \"note\" : \"note\",\n    \"docName\" : \"docName\",\n    \"docId\" : 6,\n    \"docType\" : \"docType\",\n    \"dateOfExecution\" : \"dateOfExecution\",\n    \"numOfDoc\" : 1,\n    \"id\" : \"id\",\n    \"indiId\" : 0,\n    \"content\" : \"content\"\n  } ]\n}", IndiMappingModelResponse.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,19 +1,17 @@
 package com.delibrary.dao.entity;
 
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class IndiMappingEntity {
+@Table(name = "individualdocumentmapping")
+public class IndiMappingPersistEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "doc_name")
-    private String docName;
-    @Column(name = "doc_code")
-    private String docCode;
+    @Column(name = "doc_type")
+    private String docType;
     @Column(name = "number_of_doc")
     private Long numberOfDoc;
     @Column(name = "date_of_execution")
@@ -24,21 +22,15 @@ public class IndiMappingEntity {
     private String note;
     @Column(name = "content")
     private String content;
+    @Column(name = "doc_id")
+    private Integer docId;
+    @Column(name = "individual_id")
+    private Integer individualId;
 
 
-    public IndiMappingEntity(Long id, String docName, String docCode, Long numberOfDoc, Date dateOfExecution, Date dateOfSigning, String note, String content) {
-        this.id = id;
-        this.docName = docName;
-        this.docCode = docCode;
-        this.numberOfDoc = numberOfDoc;
-        this.dateOfExecution = dateOfExecution;
-        this.dateOfSigning = dateOfSigning;
-        this.note = note;
-        this.content = content;
+    public IndiMappingPersistEntity() {
     }
 
-    public IndiMappingEntity() {
-    }
 
     public Long getId() {
         return id;
@@ -48,12 +40,13 @@ public class IndiMappingEntity {
         this.id = id;
     }
 
-    public String getDocName() {
-        return docName;
+
+    public String getDocType() {
+        return docType;
     }
 
-    public void setDocName(String docName) {
-        this.docName = docName;
+    public void setDocType(String docType) {
+        this.docType = docType;
     }
 
     public Long getNumberOfDoc() {
@@ -96,12 +89,19 @@ public class IndiMappingEntity {
         this.content = content;
     }
 
-
-    public String getDocCode() {
-        return docCode;
+    public Integer getDocId() {
+        return docId;
     }
 
-    public void setDocCode(String docCode) {
-        this.docCode = docCode;
+    public void setDocId(Integer docId) {
+        this.docId = docId;
+    }
+
+    public Integer getIndividualId() {
+        return individualId;
+    }
+
+    public void setIndividualId(Integer individualId) {
+        this.individualId = individualId;
     }
 }
