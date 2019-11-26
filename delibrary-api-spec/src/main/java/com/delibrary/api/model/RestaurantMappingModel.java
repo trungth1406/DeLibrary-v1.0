@@ -10,15 +10,15 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * IndiMappingModel
+ * RestaurantMappingModel
  */
 @Validated
-public class IndiMappingModel   {
+public class RestaurantMappingModel   {
   @JsonProperty("id")
   private String id = null;
 
-  @JsonProperty("indiId")
-  private Integer indiId = null;
+  @JsonProperty("restaurantId")
+  private Long restaurantId = null;
 
   @JsonProperty("docName")
   private String docName = null;
@@ -38,13 +38,10 @@ public class IndiMappingModel   {
   @JsonProperty("dateOfSigning")
   private String dateOfSigning = null;
 
-  @JsonProperty("content")
-  private String content = null;
-
   @JsonProperty("note")
   private String note = null;
 
-  public IndiMappingModel id(String id) {
+  public RestaurantMappingModel id(String id) {
     this.id = id;
     return this;
   }
@@ -63,26 +60,26 @@ public class IndiMappingModel   {
     this.id = id;
   }
 
-  public IndiMappingModel indiId(Integer indiId) {
-    this.indiId = indiId;
+  public RestaurantMappingModel restaurantId(Long restaurantId) {
+    this.restaurantId = restaurantId;
     return this;
   }
 
   /**
-   * Get indiId
-   * @return indiId
+   * Get restaurantId
+   * @return restaurantId
   **/
   @ApiModelProperty(value = "")
 
-  public Integer getIndiId() {
-    return indiId;
+  public Long getRestaurantId() {
+    return restaurantId;
   }
 
-  public void setIndiId(Integer indiId) {
-    this.indiId = indiId;
+  public void setRestaurantId(Long restaurantId) {
+    this.restaurantId = restaurantId;
   }
 
-  public IndiMappingModel docName(String docName) {
+  public RestaurantMappingModel docName(String docName) {
     this.docName = docName;
     return this;
   }
@@ -101,7 +98,7 @@ public class IndiMappingModel   {
     this.docName = docName;
   }
 
-  public IndiMappingModel docId(Integer docId) {
+  public RestaurantMappingModel docId(Integer docId) {
     this.docId = docId;
     return this;
   }
@@ -120,7 +117,7 @@ public class IndiMappingModel   {
     this.docId = docId;
   }
 
-  public IndiMappingModel docType(String docType) {
+  public RestaurantMappingModel docType(String docType) {
     this.docType = docType;
     return this;
   }
@@ -139,7 +136,7 @@ public class IndiMappingModel   {
     this.docType = docType;
   }
 
-  public IndiMappingModel numOfDoc(Integer numOfDoc) {
+  public RestaurantMappingModel numOfDoc(Integer numOfDoc) {
     this.numOfDoc = numOfDoc;
     return this;
   }
@@ -158,7 +155,7 @@ public class IndiMappingModel   {
     this.numOfDoc = numOfDoc;
   }
 
-  public IndiMappingModel dateOfExecution(String dateOfExecution) {
+  public RestaurantMappingModel dateOfExecution(String dateOfExecution) {
     this.dateOfExecution = dateOfExecution;
     return this;
   }
@@ -177,7 +174,7 @@ public class IndiMappingModel   {
     this.dateOfExecution = dateOfExecution;
   }
 
-  public IndiMappingModel dateOfSigning(String dateOfSigning) {
+  public RestaurantMappingModel dateOfSigning(String dateOfSigning) {
     this.dateOfSigning = dateOfSigning;
     return this;
   }
@@ -196,26 +193,7 @@ public class IndiMappingModel   {
     this.dateOfSigning = dateOfSigning;
   }
 
-  public IndiMappingModel content(String content) {
-    this.content = content;
-    return this;
-  }
-
-  /**
-   * Get content
-   * @return content
-  **/
-  @ApiModelProperty(value = "")
-
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String content) {
-    this.content = content;
-  }
-
-  public IndiMappingModel note(String note) {
+  public RestaurantMappingModel note(String note) {
     this.note = note;
     return this;
   }
@@ -243,38 +221,36 @@ public class IndiMappingModel   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IndiMappingModel indiMappingModel = (IndiMappingModel) o;
-    return Objects.equals(this.id, indiMappingModel.id) &&
-        Objects.equals(this.indiId, indiMappingModel.indiId) &&
-        Objects.equals(this.docName, indiMappingModel.docName) &&
-        Objects.equals(this.docId, indiMappingModel.docId) &&
-        Objects.equals(this.docType, indiMappingModel.docType) &&
-        Objects.equals(this.numOfDoc, indiMappingModel.numOfDoc) &&
-        Objects.equals(this.dateOfExecution, indiMappingModel.dateOfExecution) &&
-        Objects.equals(this.dateOfSigning, indiMappingModel.dateOfSigning) &&
-        Objects.equals(this.content, indiMappingModel.content) &&
-        Objects.equals(this.note, indiMappingModel.note);
+    RestaurantMappingModel restaurantMappingModel = (RestaurantMappingModel) o;
+    return Objects.equals(this.id, restaurantMappingModel.id) &&
+        Objects.equals(this.restaurantId, restaurantMappingModel.restaurantId) &&
+        Objects.equals(this.docName, restaurantMappingModel.docName) &&
+        Objects.equals(this.docId, restaurantMappingModel.docId) &&
+        Objects.equals(this.docType, restaurantMappingModel.docType) &&
+        Objects.equals(this.numOfDoc, restaurantMappingModel.numOfDoc) &&
+        Objects.equals(this.dateOfExecution, restaurantMappingModel.dateOfExecution) &&
+        Objects.equals(this.dateOfSigning, restaurantMappingModel.dateOfSigning) &&
+        Objects.equals(this.note, restaurantMappingModel.note);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, indiId, docName, docId, docType, numOfDoc, dateOfExecution, dateOfSigning, content, note);
+    return Objects.hash(id, restaurantId, docName, docId, docType, numOfDoc, dateOfExecution, dateOfSigning, note);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class IndiMappingModel {\n");
+    sb.append("class RestaurantMappingModel {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    indiId: ").append(toIndentedString(indiId)).append("\n");
+    sb.append("    restaurantId: ").append(toIndentedString(restaurantId)).append("\n");
     sb.append("    docName: ").append(toIndentedString(docName)).append("\n");
     sb.append("    docId: ").append(toIndentedString(docId)).append("\n");
     sb.append("    docType: ").append(toIndentedString(docType)).append("\n");
     sb.append("    numOfDoc: ").append(toIndentedString(numOfDoc)).append("\n");
     sb.append("    dateOfExecution: ").append(toIndentedString(dateOfExecution)).append("\n");
     sb.append("    dateOfSigning: ").append(toIndentedString(dateOfSigning)).append("\n");
-    sb.append("    content: ").append(toIndentedString(content)).append("\n");
     sb.append("    note: ").append(toIndentedString(note)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -14,11 +14,33 @@ import javax.validation.constraints.*;
  */
 @Validated
 public class CorporateModel   {
+  @JsonProperty("id")
+  private Long id = null;
+
   @JsonProperty("name")
   private String name = null;
 
   @JsonProperty("city")
   private String city = null;
+
+  public CorporateModel id(Long id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   * @return id
+  **/
+  @ApiModelProperty(value = "")
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 
   public CorporateModel name(String name) {
     this.name = name;
@@ -68,13 +90,14 @@ public class CorporateModel   {
       return false;
     }
     CorporateModel corporateModel = (CorporateModel) o;
-    return Objects.equals(this.name, corporateModel.name) &&
+    return Objects.equals(this.id, corporateModel.id) &&
+        Objects.equals(this.name, corporateModel.name) &&
         Objects.equals(this.city, corporateModel.city);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, city);
+    return Objects.hash(id, name, city);
   }
 
   @Override
@@ -82,6 +105,7 @@ public class CorporateModel   {
     StringBuilder sb = new StringBuilder();
     sb.append("class CorporateModel {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
     sb.append("}");
