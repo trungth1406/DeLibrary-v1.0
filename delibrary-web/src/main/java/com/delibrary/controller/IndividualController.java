@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndividualController {
 
     @GetMapping("/individual")
-    public String individual(){
+    public String individual() {
         return "individual";
     }
 }

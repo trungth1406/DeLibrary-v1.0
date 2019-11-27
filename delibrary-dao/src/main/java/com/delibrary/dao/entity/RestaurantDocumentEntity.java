@@ -14,6 +14,10 @@ public class RestaurantDocumentEntity {
         @Column(name = "doc_code")
         private String docCode;
 
+    public RestaurantDocumentEntity() {
+        //Default Constructor
+    }
+
     public RestaurantDocumentEntity(String name, String docCode) {
         this.name = name;
         this.docCode = docCode;

@@ -4,8 +4,7 @@ import com.delibrary.api.model.IndiMappingModel;
 import com.delibrary.dao.entity.IndiMappingEntity;
 import com.delibrary.dao.entity.IndiMappingPersistEntity;
 import com.delibrary.dao.repository.DocMappingJpaRepository;
-import com.delibrary.dao.repository.DocumentMappingCriteriaRepository;
-import com.delibrary.dao.repository.IndividualDocumentMappingRepository;
+import com.delibrary.dao.repository.IndividualMappingCriteriaRepository;
 import com.delibrary.dao.service.IndividualDocumentMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,18 +14,16 @@ import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
 public class IndividualDocumentMappingServiceImpl  implements IndividualDocumentMappingService {
 
-    @Autowired
-    private IndividualDocumentMappingRepository repository;
+
     @Autowired
     private EntityManager entityManager;
     @Autowired
-    private DocumentMappingCriteriaRepository mappingCriteriaRepository;
+    private IndividualMappingCriteriaRepository individualMappingCriteriaRepository;
     @Autowired
     private DocMappingJpaRepository mappingJpaRepository;
 
@@ -39,7 +36,7 @@ public class IndividualDocumentMappingServiceImpl  implements IndividualDocument
         IndiMappingPersistEntity entity = new IndiMappingPersistEntity();
         entity.setIndividualId(model.getIndiId());
         entity.setDocId(model.getDocId());
-        entity.setNumberOfDoc(model.getNumOfDoc() );
+        entity.setNumberOfDoc(Long.valueOf(model.getNumOfDoc()));
         entity.setNote(model.getNote());
         entity.setDateOfExecution(model.getDateOfExecution() == ""?  null :dfToDb.parse(model.getDateOfExecution()));
         entity.setDateOfSigning(model.getDateOfSigning() == "" ? null : dfToDb.parse(model.getDateOfSigning()));
@@ -59,7 +56,7 @@ public class IndividualDocumentMappingServiceImpl  implements IndividualDocument
 
     @Override
     public List<IndiMappingModel> findById(long id) {
-        List<IndiMappingEntity> entities = mappingCriteriaRepository.searchWithCriteriaBuilder(id);
+        List<IndiMappingEntity> entities = individualMappingCriteriaRepository.searchWithCriteriaBuilder(id);
         List<IndiMappingModel> models = new ArrayList<>();
         IndiMappingModel model;
         for(IndiMappingEntity item : entities){
@@ -67,7 +64,7 @@ public class IndividualDocumentMappingServiceImpl  implements IndividualDocument
             model.setId(String.valueOf(item.getId()));
             model.setDocName(item.getDocName());
             model.setDocType(item.getDocCode());
-            model.setNumOfDoc( item.getNumberOfDoc());
+            model.setNumOfDoc(Math.toIntExact(item.getNumberOfDoc()));
             model.setDateOfExecution(item.getDateOfExecution() == null ? null : sdf.format(item.getDateOfExecution()));
             model.setDateOfSigning(item.getDateOfSigning() == null? null : sdf.format(item.getDateOfSigning()));
             model.setNote(item.getNote());

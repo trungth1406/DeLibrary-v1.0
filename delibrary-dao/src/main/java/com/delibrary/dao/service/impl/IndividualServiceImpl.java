@@ -3,13 +3,11 @@ package com.delibrary.dao.service.impl;
 import com.delibrary.api.model.IndividualModel;
 import com.delibrary.api.model.IndividualModelRequest;
 import com.delibrary.dao.entity.IndividualEntity;
-import com.delibrary.dao.repository.DocumentMappingCriteriaRepository;
 import com.delibrary.dao.repository.IndividualRepository;
 import com.delibrary.dao.service.IndividualService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

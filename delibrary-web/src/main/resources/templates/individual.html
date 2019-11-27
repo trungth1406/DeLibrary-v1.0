@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="/fragments/head :: head"></th:block>
     <script th:inline="javascript">
@@ -68,17 +68,17 @@
             $('#dropdown-doc-type').dropdown();
             // $("#modal-delete-mapping").modal('attach events','#modal-indi-detail');
             $("#modal-delete-mapping").modal({
-                allowMultiple : false
+                allowMultiple: false
             })
-            $("#modal-indi-detail").modal('attach events','#modal-delete-mapping');
+            $("#modal-indi-detail").modal('attach events', '#modal-delete-mapping');
             $('#date-of-execution')
             $('#date-of-signing')
             $.ajax({
-                type : "GET",
+                type: "GET",
                 url: "/indidocuments",
                 success: function (data) {
-                    $.each(data.data,function (k,v) {
-                        $("#doc-name-item").append('<div class=\"item\" data-value="' + v.id + '\">' + v.docName +'</div>')
+                    $.each(data.data, function (k, v) {
+                        $("#doc-name-item").append('<div class=\"item\" data-value="' + v.id + '\">' + v.docName + '</div>')
                     });
                 },
                 error: function (status) {
@@ -93,18 +93,18 @@
                     onDeny: function () {
                         return true;
                     },
-                    onApprove : function () {
+                    onApprove: function () {
                         var request = {
-                            "name" : $("#name").val(),
-                            "dob" : $("#dob").val(),
-                            "position" : $("#position").val(),
-                            "companyName" : $("#company-name").val()
+                            "name": $("#name").val(),
+                            "dob": $("#dob").val(),
+                            "position": $("#position").val(),
+                            "companyName": $("#company-name").val()
                         }
                         $.ajax({
                             url: "/individuals",
                             type: "POST",
                             data: JSON.stringify(request),
-                            contentType : "application/json; charset=utf-8",
+                            contentType: "application/json; charset=utf-8",
                             success: function (data, status) {
                                 console.log("Success")
                                 table.ajax.reload();
@@ -117,7 +117,7 @@
                     }
                 });
             })
-            $("#individual").on("click","button#indi-delete",function (e) {
+            $("#individual").on("click", "button#indi-delete", function (e) {
                 var tr = $(this).closest('tr');
                 var row = table.row(tr);
                 var id = row.data().id;
@@ -127,7 +127,7 @@
                     onDeny: function () {
                         return true;
                     },
-                    onApprove : function () {
+                    onApprove: function () {
                         $.ajax({
                             url: "/individuals/" + id + "/delete",
                             type: "DELETE",
@@ -145,23 +145,23 @@
             })
 
             var tableDetail;
-            $("#individual").on("click","button#indi-detail",function (e) {
+            $("#individual").on("click", "button#indi-detail", function (e) {
                 var tr = $(this).closest('tr');
                 var row = table.row(tr);
                 var id = row.data().id;
                 e.preventDefault();
                 $('.ui.modal#indi-detail')
-                    .modal('show', function(){
+                    .modal('show', function () {
                         $("#id-detail").val(id)
                         $("#name-detail").val(row.data().name)
                         $("#dob-detail").val(row.data().dob)
                         $("#company-name-detail").val(row.data().companyName)
                         $("#position-detail").val(row.data().position)
 
-                        tableDetail  = $("#individual-document-detail").DataTable({
+                        tableDetail = $("#individual-document-detail").DataTable({
                             ajax: "/indimappings/individual?id=" + id,
                             stateSave: true,
-                            columnDefs : [
+                            columnDefs: [
                                 {
                                     targets: [0],
                                     visible: false
@@ -189,53 +189,53 @@
                             ]
                         })
                     }).modal({
-                    onApprove : function () {
+                    onApprove: function () {
                         $("#individual-document-detail").dataTable().fnDestroy();
-                        $("#name-detail").prop('disabled',true)
-                        $("#dob-detail").prop('disabled',true)
-                        $("#company-name-detail").prop('disabled',true)
-                        $("#position-detail").prop('disabled',true)
-                        $("#confirm-update").prop('disabled',true)
+                        $("#name-detail").prop('disabled', true)
+                        $("#dob-detail").prop('disabled', true)
+                        $("#company-name-detail").prop('disabled', true)
+                        $("#position-detail").prop('disabled', true)
+                        $("#confirm-update").prop('disabled', true)
                         return true;
                     }
                 });
             })
 
-            $("#enable-edit").on("click",function () {
-                if($("#confirm-update").prop('disabled')){
-                    $("#name-detail").prop('disabled',false)
-                    $("#dob-detail").prop('disabled',false)
-                    $("#company-name-detail").prop('disabled',false)
-                    $("#position-detail").prop('disabled',false)
-                    $("#confirm-update").prop('disabled',false)
-                }else{
-                    $("#name-detail").prop('disabled',true)
-                    $("#dob-detail").prop('disabled',true)
-                    $("#company-name-detail").prop('disabled',true)
-                    $("#position-detail").prop('disabled',true)
-                    $("#confirm-update").prop('disabled',true)
+            $("#enable-edit").on("click", function () {
+                if ($("#confirm-update").prop('disabled')) {
+                    $("#name-detail").prop('disabled', false)
+                    $("#dob-detail").prop('disabled', false)
+                    $("#company-name-detail").prop('disabled', false)
+                    $("#position-detail").prop('disabled', false)
+                    $("#confirm-update").prop('disabled', false)
+                } else {
+                    $("#name-detail").prop('disabled', true)
+                    $("#dob-detail").prop('disabled', true)
+                    $("#company-name-detail").prop('disabled', true)
+                    $("#position-detail").prop('disabled', true)
+                    $("#confirm-update").prop('disabled', true)
                 }
             })
-            $("#confirm-update").on('click',function () {
+            $("#confirm-update").on('click', function () {
                 var request = {
                     //TODO: Add data here
-                    "name" : $("#name-detail").val(),
-                    "dob" : $("#dob-detail").val(),
-                    "companyName" : $("#company-name-detail").val(),
-                    "position" : $("#position-detail").val()
+                    "name": $("#name-detail").val(),
+                    "dob": $("#dob-detail").val(),
+                    "companyName": $("#company-name-detail").val(),
+                    "position": $("#position-detail").val()
                 }
 
                 $.ajax({
                     url: "/individuals/" + $("#id-detail").val() + "/edit",
                     type: "PATCH",
                     data: JSON.stringify(request),
-                    contentType : "application/json; charset=utf-8",
+                    contentType: "application/json; charset=utf-8",
                     success: function (data, status) {
-                        $("#name-detail").prop('disabled',true)
-                        $("#dob-detail").prop('disabled',true)
-                        $("#company-name-detail").prop('disabled',true)
-                        $("#position-detail").prop('disabled',true)
-                        $("#confirm-update").prop('disabled',true)
+                        $("#name-detail").prop('disabled', true)
+                        $("#dob-detail").prop('disabled', true)
+                        $("#company-name-detail").prop('disabled', true)
+                        $("#position-detail").prop('disabled', true)
+                        $("#confirm-update").prop('disabled', true)
                         table.ajax.reload();
                         return true;
                     },
@@ -246,24 +246,24 @@
             })
 
 
-            $("#submit-add-mapping").on('click',function () {
+            $("#submit-add-mapping").on('click', function () {
                 var request = {
-                    "indiId" : $("#id-detail").val(),
-                    "docId" : $("#dropdown-doc-name").dropdown('get value'),
-                    "docName" : $("#dropdown-doc-name").dropdown('get text'),
-                    "docType" : $("#doc-type").val(),
-                    "dateOfExecution" : $("#date-of-execution").val(),
-                    "dateOfSigning" : $("#date-of-signing").val(),
-                    "numberOfDoc" : $("#num-of-doc").val(),
-                    "note" : $("#doc-note").val()
+                    "indiId": $("#id-detail").val(),
+                    "docId": $("#dropdown-doc-name").dropdown('get value'),
+                    "docName": $("#dropdown-doc-name").dropdown('get text'),
+                    "docType": $("#doc-type").val(),
+                    "dateOfExecution": $("#date-of-execution").val(),
+                    "dateOfSigning": $("#date-of-signing").val(),
+                    "numberOfDoc": $("#num-of-doc").val(),
+                    "note": $("#doc-note").val()
                 }
                 console.log(request)
                 $.ajax({
                     type: "POST",
-                    url : "/indimappings/individual",
+                    url: "/indimappings/individual",
                     data: JSON.stringify(request),
-                    contentType : "application/json; charset=utf-8",
-                    success: function (data,status) {
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data, status) {
                         tableDetail.ajax.reload();
                     },
                     error: function () {
@@ -272,7 +272,7 @@
                 })
             })
 
-            $("#individual-document-detail").on('click',"button#indi-mapping-delete",function (e) {
+            $("#individual-document-detail").on('click', "button#indi-mapping-delete", function (e) {
                 console.log("delete mapping")
                 e.preventDefault();
                 var tr = $(this).closest('tr');
@@ -282,7 +282,7 @@
                     onApprove: function () {
                         $.ajax({
                             type: "DELETE",
-                            url : "/indimappings/"+ id + "/delete",
+                            url: "/indimappings/" + id + "/delete",
                             success: function () {
                                 tableDetail.ajax.reload()
                             },
@@ -298,7 +298,6 @@
 
 
             })
-
 
 
         })
@@ -327,7 +326,7 @@
         </div>
 
         <!--<div class="ui horizontal divider">-->
-            <!--DANH SÁCH GIẤY TỜ-->
+        <!--DANH SÁCH GIẤY TỜ-->
         <!--</div>-->
         <div class="ui top attached tabular menu">
             <a class="active item" data-tab="first">Danh sách thông tin cá nhân</a>
@@ -348,7 +347,7 @@
             </table>
         </div>
         <div class="ui bottom attached  tab segment" data-tab="second">
-            <table class="ui olive table" id ="individual-document">
+            <table class="ui olive table" id="individual-document">
                 <thead>
                 <tr>
                     <th>Food</th>

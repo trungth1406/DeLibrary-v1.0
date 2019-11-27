@@ -1,9 +1,6 @@
 package com.delibrary.dao.service;
 
 import com.delibrary.api.model.CorporateModel;
-import com.delibrary.dao.entity.RestaurantEntity;
-import com.delibrary.dao.repository.RestaurantRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +8,9 @@ import java.util.List;
 @Service
 public interface RestaurantService  {
 
-    List<RestaurantEntity> findAll();
+    List<CorporateModel> findAll();
 
-    RestaurantEntity findById(Long id);
+    CorporateModel findById(Long id);
 
     void createNewRestaurant(CorporateModel model);
 

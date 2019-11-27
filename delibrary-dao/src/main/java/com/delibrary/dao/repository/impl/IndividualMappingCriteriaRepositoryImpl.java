@@ -1,20 +1,22 @@
 package com.delibrary.dao.repository.impl;
 
-import com.delibrary.api.model.IndiMappingModelRequest;
 import com.delibrary.dao.entity.IndiMappingEntity;
 import com.delibrary.dao.entity.IndividualDocumentMappingEntity;
-import com.delibrary.dao.repository.DocumentMappingCriteriaRepository;
+import com.delibrary.dao.repository.IndividualMappingCriteriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 
 @Repository("mappingWithCriteria")
-public class DocumentMappingCriteriaRepositoryImpl implements DocumentMappingCriteriaRepository {
+public class IndividualMappingCriteriaRepositoryImpl implements IndividualMappingCriteriaRepository {
 
     @Autowired
     private EntityManager entityManager;
